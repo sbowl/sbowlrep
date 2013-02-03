@@ -3,6 +3,8 @@
 #include "wglew.h"
 #include <GL/GL.h>
 #include <cmath>
+#include <vector>
+#include <stdio.h>
 
 // data for icosahedron
 #define NO_BASIC_VERTICES 4
@@ -37,7 +39,7 @@ RenderScene::RenderScene()
   , m_fRot( 0.0f )
   , m_fTurnX ( 0.0f)
   , m_fTurnY (0.0f)
-  , m_fRendered (false)
+  , m_bRendered (false)
 {}
 
 void
@@ -87,7 +89,7 @@ RenderScene::render()
   // render camera
   
   glMatrixMode(GL_PROJECTION);
-  if (! m_fRendered)
+  if (! m_bRendered)
   {
 	  glLoadIdentity();
   
@@ -142,5 +144,13 @@ RenderScene::rotX ( float fAngle )
 void
 RenderScene::Refinement()
 {
-	
+
+	//std::vector<int> v;
+ //   int i;
+ //
+ //   for (i=0; i<100; ++i) {
+ //       v.push_back(i); // Fügt i ans Ende von v an.
+ //       ++v[i]; // v[i] muss bereits existieren.
+	//}
+	//printf("%d", v[2]);
 }
