@@ -1,4 +1,4 @@
-﻿Der Buildvorgang wurde am 03.02.2013 19:22:09 gestartet.
+﻿Der Buildvorgang wurde am 03.02.2013 21:22:43 gestartet.
 Projekt "Z:\vc_prak\Superbowl\Superbowl\Superbowl.vcxproj" auf Knoten "2", build Ziel(e).
 InitializeBuildStatus:
   "Debug\Superbowl.unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
@@ -6,18 +6,20 @@ GenerateTargetFrameworkMonikerAttribute:
 Das Ziel "GenerateTargetFrameworkMonikerAttribute" wird übersprungen, da alle Ausgabedateien hinsichtlich der Eingabedateien aktuell sind.
 ClCompile:
   Alle Ausgaben sind aktuell.
-  Alle Ausgaben sind aktuell.
-  Alle Ausgaben sind aktuell.
-ResourceCompile:
-  Alle Ausgaben sind aktuell.
-Link:
-  Alle Ausgaben sind aktuell.
-  Superbowl.vcxproj -> Z:\vc_prak\Superbowl\Debug\Superbowl.exe
-FinalizeBuildStatus:
-  Die Datei "Debug\Superbowl.unsuccessfulbuild" wird gelöscht.
-  Aktualisieren des Timestamps von "Debug\Superbowl.lastbuildstate".
-Die Erstellung des Projekts "Z:\vc_prak\Superbowl\Superbowl\Superbowl.vcxproj" ist abgeschlossen, build Ziel(e).
+  C:\Programme\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt RenderScene.cpp /clr:nostdlib 
+  RenderScene.cpp
+RenderScene.cpp(16): warning C4305: 'Initialisierung': Verkürzung von 'double' in 'float'
+RenderScene.cpp(16): warning C4305: 'Initialisierung': Verkürzung von 'double' in 'float'
+RenderScene.cpp(16): warning C4305: 'Initialisierung': Verkürzung von 'double' in 'float'
+RenderScene.cpp(17): warning C4305: 'Initialisierung': Verkürzung von 'double' in 'float'
+RenderScene.cpp(17): warning C4305: 'Initialisierung': Verkürzung von 'double' in 'float'
+RenderScene.cpp(17): warning C4305: 'Initialisierung': Verkürzung von 'double' in 'float'
+RenderScene.cpp(18): warning C4305: 'Initialisierung': Verkürzung von 'double' in 'float'
+RenderScene.cpp(18): warning C4305: 'Initialisierung': Verkürzung von 'double' in 'float'
+RenderScene.cpp(19): warning C4305: 'Initialisierung': Verkürzung von 'double' in 'float'
+RenderScene.cpp(145): error C2133: 'a': Unbekannte Größe
+Die Erstellung des Projekts "Z:\vc_prak\Superbowl\Superbowl\Superbowl.vcxproj" ist abgeschlossen, build Ziel(e) -- FEHLER.
 
-Das Erstellen war erfolgreich.
+Fehler beim Erstellen
 
-Verstrichene Zeit 00:00:00.85
+Verstrichene Zeit 00:00:01.18

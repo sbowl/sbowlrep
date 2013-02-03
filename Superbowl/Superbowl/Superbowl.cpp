@@ -75,18 +75,27 @@ void keyboardCallback( unsigned char key, int x, int y)
     exit(0);
     break;
 
-  case 'k':
+	//turn left
+  case 'a':
     cRenderer.rotY( 5.0f );
     glutPostRedisplay();				            // creates an event for redrawing (calls displayCallback() )
     break;
 
-  case 'l':
+	//turn right
+  case 'd':
     cRenderer.rotY( -5.0f );
     glutPostRedisplay();				            // creates an event for redrawing (calls displayCallback() )
     break;
-
-  case 'o':
-    //cRenderer.CamChange();
+	
+	//turn upwards
+  case 'w':
+    cRenderer.rotX( -5.0f );
+    glutPostRedisplay();				            // creates an event for redrawing (calls displayCallback() )
+    break;
+	
+	//turn downwards
+  case 's':
+    cRenderer.rotX( 5.0f );
     glutPostRedisplay();				            // creates an event for redrawing (calls displayCallback() )
     break;
   }

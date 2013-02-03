@@ -14,7 +14,10 @@ public:
   // render the scene
   void render();
   // rotate scene
-  void rotY( float fAngle ) { m_fRotY += fAngle; }
+  void rotY( float fAngle ) ;
+  void rotX ( float fAngle ) ;
+
+  void Refinement();
 
 protected:
   int   m_iWidth;
@@ -28,6 +31,16 @@ protected:
   double m_dFarDistance;
 
   // rotation angle around y-axis
-  float  m_fRotY;
+  float  m_fRot;
+  float  m_fTurnX;
+  float  m_fTurnY;
+
+  bool m_bRendered;
+
+  int m_iNoVertices;
+  int m_iNoVerticesNew;
+  int m_iNoFaces;
+  int m_iNoFacesNew;
+
 };
 #endif
