@@ -48,6 +48,9 @@
     <ClInclude Include="wglew.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="RenderScene.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">
@@ -62,6 +65,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderScene.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

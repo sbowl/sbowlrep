@@ -1,34 +1,23 @@
-﻿Der Buildvorgang wurde am 03.02.2013 17:01:31 gestartet.
-Projekt "\\psf\Home\Desktop\Superbowl\Superbowl\Superbowl\Superbowl.vcxproj" auf Knoten "2", build Ziel(e).
+﻿Der Buildvorgang wurde am 03.02.2013 19:22:09 gestartet.
+Projekt "Z:\vc_prak\Superbowl\Superbowl\Superbowl.vcxproj" auf Knoten "2", build Ziel(e).
 InitializeBuildStatus:
   "Debug\Superbowl.unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+GenerateTargetFrameworkMonikerAttribute:
+Das Ziel "GenerateTargetFrameworkMonikerAttribute" wird übersprungen, da alle Ausgabedateien hinsichtlich der Eingabedateien aktuell sind.
 ClCompile:
-  C:\Programme\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\Superbowl.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt stdafx.cpp /clr:nostdlib 
-  stdafx.cpp
-  C:\Programme\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Superbowl.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Programme\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt AssemblyInfo.cpp Superbowl.cpp /clr:nostdlib 
-  AssemblyInfo.cpp
-  Superbowl.cpp
-  Code wird generiert...
-  C:\Programme\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /analyze- /errorReport:prompt "C:\Dokumente und Einstellungen\jh\Lokale Einstellungen\Temp\.NETFramework,Version=v4.0.AssemblyAttributes.cpp"
-  .NETFramework,Version=v4.0.AssemblyAttributes.cpp
+  Alle Ausgaben sind aktuell.
+  Alle Ausgaben sind aktuell.
+  Alle Ausgaben sind aktuell.
 ResourceCompile:
-  C:\Programme\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _UNICODE /D UNICODE /l"0x0409" /nologo /fo"Debug\app.res" app.rc 
+  Alle Ausgaben sind aktuell.
 Link:
-  C:\Programme\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"\\psf\Home\Desktop\Superbowl\Superbowl\Debug\Superbowl.exe" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\Superbowl.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"\\psf\Home\Desktop\Superbowl\Superbowl\Debug\Superbowl.pdb" /ASSEMBLYDEBUG /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\app.res
-  Debug\AssemblyInfo.obj
-  Debug\stdafx.obj
-  Debug\Superbowl.obj
-  "Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
-  freeglut.lib
-  glew32.lib
-  Superbowl.vcxproj -> \\psf\Home\Desktop\Superbowl\Superbowl\Debug\Superbowl.exe
-Manifest:
-  C:\Programme\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"\\psf\Home\Desktop\Superbowl\Superbowl\Debug\Superbowl.exe;#1" /manifest Debug\Superbowl.exe.intermediate.manifest
+  Alle Ausgaben sind aktuell.
+  Superbowl.vcxproj -> Z:\vc_prak\Superbowl\Debug\Superbowl.exe
 FinalizeBuildStatus:
   Die Datei "Debug\Superbowl.unsuccessfulbuild" wird gelöscht.
   Aktualisieren des Timestamps von "Debug\Superbowl.lastbuildstate".
-Die Erstellung des Projekts "\\psf\Home\Desktop\Superbowl\Superbowl\Superbowl\Superbowl.vcxproj" ist abgeschlossen, build Ziel(e).
+Die Erstellung des Projekts "Z:\vc_prak\Superbowl\Superbowl\Superbowl.vcxproj" ist abgeschlossen, build Ziel(e).
 
 Das Erstellen war erfolgreich.
 
-Verstrichene Zeit 00:00:04.98
+Verstrichene Zeit 00:00:00.85
