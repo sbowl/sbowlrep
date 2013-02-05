@@ -69,8 +69,7 @@ RenderScene::setWindowSize( int width, int height )
   glViewport( 0, 0, m_iWidth, m_iHeight );			// tells OpenGL the new size of the render area
 }
 
-void
-RenderScene::render()
+void RenderScene::render_initGL()
 {
   float afPos[] = { 0.0, 0.0, 1.0, 0.0 }; // light source at infinity
   //-----------------------------------------------------------------
@@ -102,29 +101,41 @@ RenderScene::render()
   glDisable(GL_CULL_FACE);
   // enable anti-aliasing
   glEnable( GL_MULTISAMPLE_ARB );
-  //-----------------------------------------------------------------
-  // render camera
-  //-----------------------------------------------------------------
-  // render camera
-  
-  glMatrixMode(GL_PROJECTION);
-  if (! m_bRendered)
-  {
-	  glLoadIdentity();
-  
-      double left,right,bottom,top;
-	  top=m_dNearDistance * tan( m_fHeightAngle/2.0 );
-	  bottom=-top;
-	  right=top * (double)m_iWidth/(double)m_iHeight;
-	  left=-right;
-	  
-	  glFrustum((GLdouble)left,(GLdouble)right,(GLdouble)bottom,(GLdouble)top,(GLdouble)m_dNearDistance,(GLdouble)m_dFarDistance);
-	  // camera placed at (0 0 10) looking in -z direction
-	  glTranslatef( 0, 0, -10.0f );
-	  m_bRendered = true;
-  }
-  glRotatef( m_fRot, m_fTurnX, m_fTurnY, 0.0f );
+}
 
+void RenderScene::render_camera()
+{
+  //-----------------------------------------------------------------
+  // render camera
+  //-----------------------------------------------------------------
+  // render camera
+  
+  if (m_bRendered) {
+	glMatrixMode(GL_PROJECTION);
+	glRotatef( m_fRot, m_fTurnX, m_fTurnY, 0.0f );
+	return;
+  }
+
+  glMatrixMode(GL_PROJECTION);
+
+  glLoadIdentity();
+  
+  double left,right,bottom,top;
+  top=m_dNearDistance * tan( m_fHeightAngle/2.0 );
+  bottom=-top;
+  right=top * (double)m_iWidth/(double)m_iHeight;
+  left=-right;
+	  
+  glFrustum((GLdouble)left,(GLdouble)right,(GLdouble)bottom,(GLdouble)top,(GLdouble)m_dNearDistance,(GLdouble)m_dFarDistance);
+  // camera placed at (0 0 10) looking in -z direction
+  glTranslatef( 0, 0, -10.0f );
+  m_bRendered = true;
+
+  glRotatef( m_fRot, m_fTurnX, m_fTurnY, 0.0f );
+}
+
+void RenderScene::render_scene()
+{
   //-----------------------------------------------------------------
   // render scene
   //-----------------------------------------------------------------
