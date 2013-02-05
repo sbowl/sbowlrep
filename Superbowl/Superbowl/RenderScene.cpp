@@ -48,6 +48,9 @@ static const unsigned int auiBasicIndices[NO_BASIC_FACES*3] =
 	5,6,7
 };
 
+RenderSceneA cRendererA;
+RenderSceneB cRendererB;
+
 // constructor
 RenderScene::RenderScene()
   : m_iWidth( 800 )
@@ -174,13 +177,8 @@ RenderScene::rotX ( float fAngle )
 void
 RenderScene::Refinement()
 {
-
-	//std::vector<int> v;
- //   int i;
- //
- //   for (i=0; i<100; ++i) {
- //       v.push_back(i); // Fügt i ans Ende von v an.
- //       ++v[i]; // v[i] muss bereits existieren.
-	//}
-	//printf("%d", v[2]);
+	/* Beispiel: Verwende das Refinement() von dooda */
+	cRendererA.Refinement();
+	/* oder doch das andere? */
+	//cRendererB.Refinement();
 }
