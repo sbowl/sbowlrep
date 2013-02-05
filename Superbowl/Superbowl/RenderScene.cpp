@@ -13,7 +13,7 @@
 //#define EDGE 1.63299316185545 //Umkugelradius=1 => a= 4/sqrt(6)
 //#define HEIGHT 1.41421356237310 //sqrt(3)/2 * a
 
-#define ONEOVERSQRT3 0.57735026918963
+#define ONEOVERSQRT3 0.57735026918963f
 #define RADIUS 1
 
 static float afBasicVertices[NO_BASIC_VERTICES*3] =
