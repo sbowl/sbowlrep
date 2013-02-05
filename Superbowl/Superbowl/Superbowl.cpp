@@ -54,7 +54,9 @@ int main(int argc, char* argv[])
 void displayCallback()
 {
   // render the scene
-  cRenderer.render();
+  cRenderer.render_initGL();
+  cRenderer.render_camera();
+  cRenderer.render_scene();
   // flush the command stream
   glFlush();
   // causes double buffered windows to show rendered content
