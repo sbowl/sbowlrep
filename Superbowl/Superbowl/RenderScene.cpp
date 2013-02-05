@@ -7,26 +7,45 @@
 #include <stdio.h>
 
 // data for icosahedron
-#define NO_BASIC_VERTICES 4
-#define NO_BASIC_FACES    4
+#define NO_BASIC_VERTICES 8
+#define NO_BASIC_FACES    12
 
-#define EDGE 1.63299316185545f //Umkugelradius=1 => a= 4/sqrt(6)
-#define HEIGHT 1.41421356237310f //sqrt(3)/2 * a
+//#define EDGE 1.63299316185545 //Umkugelradius=1 => a= 4/sqrt(6)
+//#define HEIGHT 1.41421356237310 //sqrt(3)/2 * a
+
+#define ONEOVERSQRT3 0.57735026918963
+#define RADIUS 1
 
 static float afBasicVertices[NO_BASIC_VERTICES*3] =
-{
-  -0.5*EDGE, -0.3333333333f*HEIGHT, -0.3333333333f*HEIGHT,
-  0.5*EDGE, -0.3333333333f*HEIGHT, -0.3333333333f*HEIGHT,
-  0.0, -0.3333333333f*HEIGHT, 0.6666666666f*HEIGHT,
-  0.0, 0.6666666666f*HEIGHT, 0.0,
+{//bei 1,1,1 beginnend, gegen den uhrzeigersinn
+  ONEOVERSQRT3*RADIUS,ONEOVERSQRT3*RADIUS, ONEOVERSQRT3*RADIUS,
+  ONEOVERSQRT3*RADIUS,ONEOVERSQRT3*RADIUS, -ONEOVERSQRT3*RADIUS,
+  -ONEOVERSQRT3*RADIUS,ONEOVERSQRT3*RADIUS, ONEOVERSQRT3*RADIUS,
+  -ONEOVERSQRT3*RADIUS,ONEOVERSQRT3*RADIUS, -ONEOVERSQRT3*RADIUS,
+  -ONEOVERSQRT3*RADIUS,-ONEOVERSQRT3*RADIUS, ONEOVERSQRT3*RADIUS,
+  -ONEOVERSQRT3*RADIUS,-ONEOVERSQRT3*RADIUS, -ONEOVERSQRT3*RADIUS,
+  ONEOVERSQRT3*RADIUS,-ONEOVERSQRT3*RADIUS, ONEOVERSQRT3*RADIUS,
+  ONEOVERSQRT3*RADIUS,-ONEOVERSQRT3*RADIUS, -ONEOVERSQRT3*RADIUS
 };
 
 static const unsigned int auiBasicIndices[NO_BASIC_FACES*3] =
 {
-  0,1,2,
-  0,1,3,
-  0,2,3,
-  1,2,3,
+//  0,1,2,
+//  0,1,3,
+//  0,2,3,
+//  1,2,3,
+	0,1,3,
+	0,3,2,
+	2,3,5,
+	2,5,4,
+	0,2,4,
+	0,4,6,
+	0,6,7,
+	0,1,7,
+	1,3,7,
+	3,5,7,
+	4,5,6,
+	5,6,7
 };
 
 // constructor
@@ -50,7 +69,8 @@ RenderScene::setWindowSize( int width, int height )
   glViewport( 0, 0, m_iWidth, m_iHeight );			// tells OpenGL the new size of the render area
 }
 
-void RenderScene::render_initGL()
+void
+RenderScene::render()
 {
   float afPos[] = { 0.0, 0.0, 1.0, 0.0 }; // light source at infinity
   //-----------------------------------------------------------------
@@ -76,47 +96,35 @@ void RenderScene::render_initGL()
   glEnable( GL_COLOR_MATERIAL );
   glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
   // fill the front side of the polygone and use wireframe for back side
-  glPolygonMode(GL_FRONT,GL_FILL);
-  glPolygonMode(GL_BACK,GL_FILL);
+  glPolygonMode(GL_FRONT,GL_LINE);
+  glPolygonMode(GL_BACK,GL_LINE);
   // do not use culling
   glDisable(GL_CULL_FACE);
   // enable anti-aliasing
   glEnable( GL_MULTISAMPLE_ARB );
-}
-
-void RenderScene::render_camera()
-{
   //-----------------------------------------------------------------
   // render camera
   //-----------------------------------------------------------------
   // render camera
   
-  if (m_bRendered) {
-	glMatrixMode(GL_PROJECTION);
-	glRotatef( m_fRot, m_fTurnX, m_fTurnY, 0.0f );
-	return;
-  }
-
   glMatrixMode(GL_PROJECTION);
-
-  glLoadIdentity();
+  if (! m_bRendered)
+  {
+	  glLoadIdentity();
   
-  double left,right,bottom,top;
-  top=m_dNearDistance * tan( m_fHeightAngle/2.0 );
-  bottom=-top;
-  right=top * (double)m_iWidth/(double)m_iHeight;
-  left=-right;
+      double left,right,bottom,top;
+	  top=m_dNearDistance * tan( m_fHeightAngle/2.0 );
+	  bottom=-top;
+	  right=top * (double)m_iWidth/(double)m_iHeight;
+	  left=-right;
 	  
-  glFrustum((GLdouble)left,(GLdouble)right,(GLdouble)bottom,(GLdouble)top,(GLdouble)m_dNearDistance,(GLdouble)m_dFarDistance);
-  // camera placed at (0 0 10) looking in -z direction
-  glTranslatef( 0, 0, -10.0f );
-  m_bRendered = true;
-
+	  glFrustum((GLdouble)left,(GLdouble)right,(GLdouble)bottom,(GLdouble)top,(GLdouble)m_dNearDistance,(GLdouble)m_dFarDistance);
+	  // camera placed at (0 0 10) looking in -z direction
+	  glTranslatef( 0, 0, -10.0f );
+	  m_bRendered = true;
+  }
   glRotatef( m_fRot, m_fTurnX, m_fTurnY, 0.0f );
-}
 
-void RenderScene::render_scene()
-{
   //-----------------------------------------------------------------
   // render scene
   //-----------------------------------------------------------------
