@@ -12,7 +12,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D3136334-B578-410F-B485-0E725F392975}</ProjectGuid>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>Superbowl</RootNamespace>
   </PropertyGroup>
