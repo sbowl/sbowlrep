@@ -51,6 +51,15 @@
     <ClInclude Include="RenderScene.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSceneB.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSceneA.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">
@@ -68,6 +77,12 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="RenderScene.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSceneB.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSceneA.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

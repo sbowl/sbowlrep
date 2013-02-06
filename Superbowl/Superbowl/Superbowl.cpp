@@ -22,7 +22,6 @@ void keyboardCallback( unsigned char key, int x, int y);
 // global variable :(
 // uncomment to render a particular scene
 RenderScene	 cRenderer;
-//RenderScene2 cRenderer;
 
 int main(int argc, char* argv[])
 {
@@ -100,6 +99,14 @@ void keyboardCallback( unsigned char key, int x, int y)
     cRenderer.rotX( 5.0f );
     glutPostRedisplay();				            // creates an event for redrawing (calls displayCallback() )
     break;
+
+	//less vertices
+  case '-':
+	  break;
+	
+	  //moar vertices
+  case '+':
+	  break;
   }
 }
 

@@ -1,6 +1,10 @@
 #ifndef RENDERSCENE_H
 #define RENDERSCENE_H
 
+#include "RenderSceneA.h"
+#include "RenderSceneB.h"
+
+
 class RenderScene
 {
 public:
