@@ -40,15 +40,35 @@ void RenderSceneB::RefinementStep()
 	
 	int m_iNoFacesOld = m_iNoFaces;
 
+	/* paranoia */
+	if (m_iNoFacesOld > NO_FACES_MAX / 4) {
+		refinementLevelNew = refinementLevel;
+		return;
+	}
+
 	/* transverse all faces, turn each one into 4 new ones */
-	for (i = 0; i < m_iNoFacesOld*3; i++) {
-		/* paranoia */
-		if (m_iNoFaces + 3 > NO_FACES_MAX) break;
+	m_iNoFaces *= 4;
 
-		/* insert 3 new faces (ie split up 1 old face into 4 faces) */
-		m_iNoFaces += 3;
+	/* Idee:
+	flächen-array kreieren, das 6 (3*2) vertices pro existierender fläche bereitstellt
+	darüber iterieren, und unbehandelte vertices ('== -1') hinzufügen. dabei:
+		nochmals über alle flächen iterieren, und die, die an die zu behandelnden vertices grenzen
+		ebenfalls auf dieselbe neue vertex-# setzen.
+		Neu hinzugefügte ("behandelte") vertices werden einfach ans [bestehende] vertex-array angefügt.
+	über das nun vollständig behandelte flächen-array iterieren, und ein neues flächen-array
+	aus allen vertices erzeugen. */
 
-		//auiIndices[i]
+	int bigFace_vertices[(NO_FACES_MAX / 4) * 6]; //m_iNoFacesOld*3*2, aber ist nicht constant..
+
+	/* init bigFace with the current non-refined faces,
+	skip 'in-between' vertices that still have to be generated */
+	for (i = 0; i < m_iNoFacesOld; i++) {
+		bigFace_vertices[i * 6] = auiIndices[i * 3];
+		bigFace_vertices[i * 6 + 1] = -1;
+		bigFace_vertices[i * 6 + 2] = auiIndices[i * 3 + 1];
+		bigFace_vertices[i * 6 + 3] = -1;
+		bigFace_vertices[i * 6 + 4] = auiIndices[i * 3 + 2];
+		bigFace_vertices[i * 6 + 5] = -1;
 	}
 
 #endif
