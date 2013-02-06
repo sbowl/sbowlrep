@@ -22,13 +22,13 @@ void RenderSceneB::RefinementStep()
 #if 0 /* we're gonna rebuild the arrays from scratch? */
 	
 	float afVerticesOld[NO_VERTICES_MAX*3];
-	int auiIndicesOld[NO_VERTICES_MAX*3];
+	int auiIndicesOld[NO_FACES_MAX*3];
 
 	/* backup current indexed shape set */
-	for (i = 0; i < NO_VERTICES_MAX*3; i++) {
+	for (i = 0; i < NO_VERTICES_MAX*3; i++)
 		afVerticesOld[i] = afVertices[i];
+	for (i = 0; i < NO_FACES_MAX*3; i++)
 		auiIndicesOld[i = auiIndices[i];
-	}
 	
 	/* reset current indexed shape set */
 	m_iNoVertices = 0;
@@ -38,7 +38,15 @@ void RenderSceneB::RefinementStep()
 
 #else /* just append additional stuff to the arrays */
 	
+	int m_iNoFacesOld = m_iNoFaces;
 
+	/* transverse all faces, turn each one into 4 new ones */
+	for (i = 0; i < m_iNoFacesOld*3; i++) {
+		/* insert 3 new faces (ie split up 1 old face into 4 faces) */
+		m_iNoFaces += 3;
+
+		//auiIndices[i]
+	}
 
 #endif
 
