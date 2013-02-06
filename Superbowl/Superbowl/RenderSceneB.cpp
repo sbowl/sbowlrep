@@ -63,56 +63,78 @@ void RenderSceneB::RefinementStep()
 	int bigFace_vertices[(NO_FACES_MAX / 4) * 6]; //m_iNoFacesOld*3*2, aber ist nicht constant..
 
 	/* init bigFace with the current non-refined faces,
-	skip 'in-between' vertices that still have to be generated */
-	for (i = 0; i < m_iNoFacesOld; i++) {
-		/* bekannte (bisherige) vertices eintragen */
-		bigFace_vertices[i * 6] = auiIndices[i * 3];
-		bigFace_vertices[i * 6 + 2] = auiIndices[i * 3 + 1];
-		bigFace_vertices[i * 6 + 4] = auiIndices[i * 3 + 2];
+	mark 'in-between' vertices that still have to be generated as such */
 
+	/* bekannte (bisherige) vertices eintragen */
+	for (i = 0; i < m_iNoFacesOld; i++) {
+		bigFace_vertices[i * 6] = auiIndices[i * 3];
+		bigFace_vertices[i * 6 + 1] = -1;
+		bigFace_vertices[i * 6 + 2] = auiIndices[i * 3 + 1];
+		bigFace_vertices[i * 6 + 3] = -1;
+		bigFace_vertices[i * 6 + 4] = auiIndices[i * 3 + 2];
+		bigFace_vertices[i * 6 + 5] = -1;
+	}
+	for (i = 0; i < m_iNoFacesOld; i++) {
 		/* neue vertices einfügen (jede kante erhält einen vertex in der mitte, wird also halbiert) */
 		/* jeden vertex in der kantenmitte berechnen und auf radius normalisieren */
 
-		/* füge ein */
-		bigFace_vertices[i * 6 + 1] = ++vertexInd;
-		/* berechne coords */
-		//...
-		//afVertices[vertexInd * 3] = x;
-		//afVertices[vertexInd * 3 + 1] = y;
-		//afVertices[vertexInd * 3 + 2] = z;
+		/* struktur:
+				+0
+				/\
+			  +5  +1
+			  /_+3_\
+			+4      +2
+		*/
 
-		/* füge ein */
-		bigFace_vertices[i * 6 + 3] = ++vertexInd;
-		/* berechne coords */
-		//...
-		//afVertices[vertexInd * 3] = x;
-		//afVertices[vertexInd * 3 + 1] = y;
-		//afVertices[vertexInd * 3 + 2] = z;
+		/* füge ein falls noch nicht vorhanden */
+		if (bigFace_vertices[i * 6 + 1] == -1) {
+			bigFace_vertices[i * 6 + 1] = ++vertexInd;
+			/* berechne coords */
+			//...
+			//afVertices[vertexInd * 3] = x;
+			//afVertices[vertexInd * 3 + 1] = y;
+			//afVertices[vertexInd * 3 + 2] = z;
+		}
 
-		/* füge ein */
-		bigFace_vertices[i * 6 + 5] = ++vertexInd;
-		/* berechne coords */
-		//...
-		//afVertices[vertexInd * 3] = x;
-		//afVertices[vertexInd * 3 + 1] = y;
-		//afVertices[vertexInd * 3 + 2] = z;
+		/* füge ein falls noch nicht vorhanden */
+		if (bigFace_vertices[i * 6 + 3] == -1) {
+			bigFace_vertices[i * 6 + 3] = ++vertexInd;
+			/* berechne coords */
+			//...
+			//afVertices[vertexInd * 3] = x;
+			//afVertices[vertexInd * 3 + 1] = y;
+			//afVertices[vertexInd * 3 + 2] = z;
+		}
+
+		/* füge ein falls noch nicht vorhanden */
+		if (bigFace_vertices[i * 6 + 5] == -1) {
+			bigFace_vertices[i * 6 + 5] = ++vertexInd;
+			/* berechne coords */
+			//...
+			//afVertices[vertexInd * 3] = x;
+			//afVertices[vertexInd * 3 + 1] = y;
+			//afVertices[vertexInd * 3 + 2] = z;
+		}
 
 		/* über bisher unbekannte flächen iterieren und dort die vertices auch gleich eintragen,
 		falls angrenzend an dieselbe betroffene Kante */
 		for (j = i + 1; j < m_iNoFacesOld; j++) {
 			/* check edge 1 of this face */
-			if (bigFace_vertices[j * 6] == auiIndices[j * 3] &&
-				bigFace_vertices[j * 6 + 2] == auiIndices[j * 3 + 1]) {
+			if (bigFace_vertices[j * 6 + 1] == -1 &&
+				auiIndices[j * 3] == auiIndices[i * 3] &&
+				auiIndices[j * 3 + 1] == auiIndices[i * 3 + 1]) {
 					bigFace_vertices[j * 6 + 1] = bigFace_vertices[i * 6 + 1];
 			}
 			/* check edge 2 of this face */
-			if (bigFace_vertices[j * 6 + 2] == auiIndices[j * 3] &&
-				bigFace_vertices[j * 6 + 4] == auiIndices[j * 3 + 1]) {
+			if (bigFace_vertices[j * 6 + 3] == -1 &&
+				auiIndices[j * 3 + 1] == auiIndices[i * 3 + 1] &&
+				auiIndices[j * 3 + 2] == auiIndices[i * 3 + 2]) {
 					bigFace_vertices[j * 6 + 3] = bigFace_vertices[i * 6 + 3];
 			}
 			/* check edge 3 of this face */
-			if (bigFace_vertices[j * 6] == auiIndices[j * 3] &&
-				bigFace_vertices[j * 6 + 4] == auiIndices[j * 3 + 2]) {
+			if (bigFace_vertices[j * 6 + 5] == -1 &&
+				auiIndices[j * 3] == auiIndices[i * 3] &&
+				auiIndices[j * 3 + 2] == auiIndices[i * 3 + 2]) {
 					bigFace_vertices[j * 6 + 5] = bigFace_vertices[i * 6 + 5];
 			}
 		}
@@ -121,7 +143,9 @@ void RenderSceneB::RefinementStep()
 	m_iNoVertices = vertexInd + 1;
 
 	/* generate new faces array from our temporary bigFaces array */
-	//..
+	for (i = 0; i < m_iNoFacesOld; i++) {
+		//..
+	}
 
 #endif
 
