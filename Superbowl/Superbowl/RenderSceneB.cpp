@@ -142,7 +142,11 @@ void RenderSceneB::RefinementStep()
 	/* update # of vertices we got now */
 	m_iNoVertices = vertexInd + 1;
 
-	/* generate new faces array from our temporary bigFaces array */
+	/* generate new faces array from our temporary bigFaces array:
+	                   /\
+					  /__\
+					 / \/ \
+					´´´´´´´		  */
 	for (i = 0; i < m_iNoFacesOld; i++) {
 		//..
 	}
