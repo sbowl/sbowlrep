@@ -42,6 +42,9 @@ void RenderSceneB::RefinementStep()
 
 	/* transverse all faces, turn each one into 4 new ones */
 	for (i = 0; i < m_iNoFacesOld*3; i++) {
+		/* paranoia */
+		if (m_iNoFaces + 3 > NO_FACES_MAX) break;
+
 		/* insert 3 new faces (ie split up 1 old face into 4 faces) */
 		m_iNoFaces += 3;
 
