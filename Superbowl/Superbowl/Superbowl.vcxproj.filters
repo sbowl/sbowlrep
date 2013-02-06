@@ -57,6 +57,9 @@
     <ClInclude Include="RenderSceneA.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Settings.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">

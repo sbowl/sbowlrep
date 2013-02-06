@@ -1,6 +1,7 @@
 #ifndef RENDERSCENE_H
 #define RENDERSCENE_H
 
+#include "Settings.h"
 #include "RenderSceneA.h"
 #include "RenderSceneB.h"
 

@@ -15,13 +15,7 @@ RenderSceneA::RenderSceneA()
 
 void RenderSceneA::Refinement()
 {
-
-	//std::vector<int> v;
- //   int i;
- //
- //   for (i=0; i<100; ++i) {
- //       v.push_back(i); // Fügt i ans Ende von v an.
- //       ++v[i]; // v[i] muss bereits existieren.
-	//}
-	//printf("%d", v[2]);
+	int m_iNoVerticesOld;
+	int auiIndices[1000];
+	m_iNoVerticesOld = m_iNoVertices;
 }
