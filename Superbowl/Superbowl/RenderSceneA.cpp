@@ -3,8 +3,6 @@
 #include "Settings.h"
 
 RenderSceneA::RenderSceneA()
-  : m_iNoVerticesNew (0)
-  , m_iNoFacesNew ( 0 )
 {}
 
 void RenderSceneA::Refinement()

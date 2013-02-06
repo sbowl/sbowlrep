@@ -18,5 +18,8 @@ extern int auiIndices[NO_VERTICES_MAX*2];
 
 extern int m_iNoVertices;
 extern int m_iNoFaces;
+
+extern int refinementLevelNew;
+extern int refinementLevel;
   
 #endif

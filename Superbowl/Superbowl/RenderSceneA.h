@@ -14,8 +14,6 @@ public:
   void Refinement();
 
 protected:
-  int m_iNoVerticesNew;
-  int m_iNoFacesNew;
 
 };
 #endif

@@ -102,10 +102,12 @@ void keyboardCallback( unsigned char key, int x, int y)
 
 	//less vertices
   case '-':
+	  if (refinementLevel > 0) refinementLevelNew = refinementLevel - 1;
 	  break;
 	
 	  //moar vertices
   case '+':
+	  if (refinementLevel < 10) refinementLevelNew = refinementLevel + 1;
 	  break;
   }
 }

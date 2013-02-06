@@ -21,3 +21,6 @@ int auiIndices[NO_VERTICES_MAX*2];
 
 int m_iNoVertices = NO_BASIC_VERTICES;
 int m_iNoFaces = NO_BASIC_FACES;
+
+int refinementLevelNew = 0;
+int refinementLevel = 0;
