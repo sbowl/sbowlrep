@@ -1,6 +1,6 @@
 /* extra stuff from dooda */
 #include "RenderSceneA.h"
-
+#include "Settings.h"
 
 RenderSceneA::RenderSceneA()
   : m_iWidth( 800 )

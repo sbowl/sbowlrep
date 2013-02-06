@@ -1,5 +1,6 @@
 /* extra stuff from doodb */
 #include "RenderSceneB.h"
+#include "Settings.h"
 
 RenderSceneB::RenderSceneB()
   : m_iWidth( 800 )
@@ -15,13 +16,8 @@ RenderSceneB::RenderSceneB()
 
 void RenderSceneB::Refinement()
 {
-
-	//std::vector<int> v;
- //   int i;
- //
- //   for (i=0; i<100; ++i) {
- //       v.push_back(i); // Fügt i ans Ende von v an.
- //       ++v[i]; // v[i] muss bereits existieren.
-	//}
-	//printf("%d", v[2]);
+	int m_iNoVerticesOld;
+	float afVertices[NO_VERTICES_MAX*3];
+	int auiIndices[NO_VERTICES_MAX];
+	m_iNoVerticesOld = m_iNoVertices;
 }

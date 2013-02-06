@@ -10,23 +10,10 @@
 #define THREEOVERSQRT5 1.34164078649987f
 #define RADIUS 1.0f
 
-static float afBasicVertices[NO_BASIC_VERTICES*3] =
-{
- -ONEOVERSQRT3*THREEOVERSQRT5*1.0f, -0.3333333333f*THREEOVERSQRT5, 0.3333333333f*THREEOVERSQRT5, 
- ONEOVERSQRT3*THREEOVERSQRT5*1.0f, -0.3333333333f*THREEOVERSQRT5, 0.3333333333f*THREEOVERSQRT5, 
- 0.0f*THREEOVERSQRT5,0.6666666666f*THREEOVERSQRT5, 0.0f, 
- 0.0f*THREEOVERSQRT5, -0.3333333333f*THREEOVERSQRT5, -0.6666666666f*THREEOVERSQRT5
-};
+extern const float afBasicVertices[NO_BASIC_VERTICES*3];
+extern const unsigned int auiBasicIndices[NO_BASIC_FACES*3];
 
-static const unsigned int auiBasicIndices[NO_BASIC_FACES*3] =
-{
-  0,1,2,
-  0,1,3,
-  0,2,3,
-  1,2,3
-};
-
-static float afVertices[NO_VERTICES_MAX*3];
-static int auiIndices[NO_VERTICES_MAX*2];
+extern float afVertices[NO_VERTICES_MAX*3];
+extern int auiIndices[NO_VERTICES_MAX*2];
 
 #endif
