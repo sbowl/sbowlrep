@@ -5,6 +5,7 @@
 #include <cmath>
 #include <vector>
 #include <stdio.h>
+#include "Settings.h"
 
 
 RenderSceneA cRendererA;

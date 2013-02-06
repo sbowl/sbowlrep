@@ -1,6 +1,7 @@
 /* extra stuff from dooda */
 #include "RenderSceneA.h"
 
+
 RenderSceneA::RenderSceneA()
   : m_iWidth( 800 )
   , m_iHeight( 600 )
@@ -16,6 +17,9 @@ RenderSceneA::RenderSceneA()
 void RenderSceneA::Refinement()
 {
 	int m_iNoVerticesOld;
-	int auiIndices[1000];
+	float afVertices[NO_VERTICES_MAX*3];
+	int auiIndices[NO_VERTICES_MAX];
 	m_iNoVerticesOld = m_iNoVertices;
+	//alte arrays kopieren
+	//
 }
