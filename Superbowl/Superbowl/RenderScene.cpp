@@ -138,7 +138,7 @@ void
 RenderScene::Refinement()
 {
 	/* Beispiel: Verwende das Refinement() von dooda */
-	cRendererA.Refinement();
+	//cRendererA.Refinement();
 	/* oder doch das andere? */
-	//cRendererB.Refinement();
+	cRendererB.Refinement();
 }
