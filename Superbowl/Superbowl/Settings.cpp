@@ -18,3 +18,6 @@ const unsigned int auiBasicIndices[NO_BASIC_FACES*3] =
 
 float afVertices[NO_VERTICES_MAX*3];
 int auiIndices[NO_VERTICES_MAX*2];
+
+int m_iNoVertices = NO_BASIC_VERTICES;
+int m_iNoFaces = NO_BASIC_FACES;

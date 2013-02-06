@@ -51,9 +51,6 @@
     <ClInclude Include="RenderScene.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="RenderSceneB.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>

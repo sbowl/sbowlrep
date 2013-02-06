@@ -43,11 +43,5 @@ protected:
   float  m_fTurnY;
 
   bool m_bRendered;
-
-  int m_iNoVertices;
-  int m_iNoVerticesNew;
-  int m_iNoFaces;
-  int m_iNoFacesNew;
-
 };
 #endif
