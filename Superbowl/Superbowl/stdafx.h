@@ -6,3 +6,14 @@
 #pragma once
 
 // TODO: Hier auf zusätzliche Header, die das Programm erfordert, verweisen.
+
+#include "Settings.h"
+#include "RenderSceneA.h"
+#include "RenderSceneB.h"
+#include "RenderScene.h"
+#include "glew.h"
+#include "wglew.h"
+#include <GL/GL.h>
+#include <cmath>
+#include <vector>
+#include <stdio.h>

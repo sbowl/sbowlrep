@@ -1,6 +1,5 @@
 /* extra stuff from doodb */
-#include "RenderSceneB.h"
-#include "Settings.h"
+#include "stdafx.h"
 
 RenderSceneB::RenderSceneB()
 {

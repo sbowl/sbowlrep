@@ -1,7 +1,7 @@
 #ifndef RENDERSCENEB_H
 #define RENDERSCENEB_H
 
-#include "Settings.h"
+#include "stdafx.h"
 
 class RenderSceneB
 {

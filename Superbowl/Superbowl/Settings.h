@@ -24,4 +24,7 @@ extern int m_iNoFaces;
 extern int refinementLevelNew;
 extern int refinementLevel;
   
+const unsigned int TEXTURE_WIDTH  = 256;
+const unsigned int TEXTURE_HEIGHT = 256;
+
 #endif

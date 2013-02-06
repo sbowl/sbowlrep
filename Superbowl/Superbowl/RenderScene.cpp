@@ -1,11 +1,4 @@
-#include "RenderScene.h"
-#include "glew.h"
-#include "wglew.h"
-#include <GL/GL.h>
-#include <cmath>
-#include <vector>
-#include <stdio.h>
-#include "Settings.h"
+#include "stdafx.h"
 
 
 RenderSceneA cRendererA;
@@ -38,32 +31,23 @@ void RenderScene::render_initGL()
   //-----------------------------------------------------------------
   // init GL
   //-----------------------------------------------------------------
-  // set background color to blue
-  glClearColor(0.0f,0.0f,0.8f,0.0f);
-  // set depth buffer to far plane
-  glClearDepth(1.0f);
-  // actually clear the framebuffer
-  glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-  // enable depth test with the z-buffer
-  glEnable(GL_DEPTH_TEST);
-  // use Gouraud shading
-  glShadeModel( GL_SMOOTH );
-  // enable light calculation
-  glEnable( GL_LIGHTING );
-  // set light 0
-  glEnable( GL_LIGHT0 );
+  glClearColor(0.0f,0.0f,0.8f,0.0f); // set background color to blue
+  glClearDepth(1.0f); // set depth buffer to far plane
+  glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT ); // actually clear the framebuffer
+  glEnable(GL_DEPTH_TEST); // enable depth test with the z-buffer
+  glShadeModel( GL_SMOOTH ); // use Gouraud shading
+  glEnable( GL_LIGHTING ); // enable light calculation
+  glEnable( GL_LIGHT0 ); // set light 0
   glLightfv( GL_LIGHT0, GL_POSITION, afPos );
 
   // set material properties from colors
+  glEnable(GL_TEXTURE_2D); // OpenGL Texturen aktivieren
   glEnable( GL_COLOR_MATERIAL );
   glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
-  // fill the front side of the polygone and use wireframe for back side
-  glPolygonMode(GL_FRONT,GL_LINE);
-  glPolygonMode(GL_BACK,GL_LINE);
-  // do not use culling
-  glDisable(GL_CULL_FACE);
-  // enable anti-aliasing
-  glEnable( GL_MULTISAMPLE_ARB );
+  glPolygonMode(GL_FRONT,GL_FILL); // fill the front side of the polygone
+  glPolygonMode(GL_BACK,GL_LINE); // and use wireframe for back side
+  glDisable(GL_CULL_FACE); // do not use culling
+  glEnable( GL_MULTISAMPLE_ARB ); // enable anti-aliasing
 }
 
 void RenderScene::render_camera()
@@ -137,12 +121,10 @@ void RenderScene::render_scene()
         glVertex3f( 1.0f, -1.0f,  1.0f);                 
         glVertex3f( 0.0f, -1.0f,  1.0f);                  
     glEnd(); 
-	glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f,  0.0f);                  
-        glVertex3f( 0.0f, -1.0f,  0.0f);                 
-        glVertex3f( 0.0f, -1.0f,  1.0f);                 
-        glVertex3f(-1.0f, -1.0f,  1.0f);                  
-    glEnd(); 
+
+
+	cRendererA.TextureTest();
+
 }
 
 void 

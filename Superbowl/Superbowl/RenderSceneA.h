@@ -1,7 +1,7 @@
 #ifndef RENDERSCENEA_H
 #define RENDERSCENEA_H
 
-#include "Settings.h"
+#include "stdafx.h"
 
 class RenderSceneA
 {
@@ -12,6 +12,8 @@ public:
   ~RenderSceneA() {};
 
   void Refinement();
+
+  void TextureTest();
 
 protected:
 
