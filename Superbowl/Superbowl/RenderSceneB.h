@@ -14,6 +14,7 @@ public:
   void Refinement();
 
 protected:
-
+	void RefinementStep();
 };
+
 #endif

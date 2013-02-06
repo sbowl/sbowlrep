@@ -14,7 +14,7 @@ extern const float afBasicVertices[NO_BASIC_VERTICES*3];
 extern const unsigned int auiBasicIndices[NO_BASIC_FACES*3];
 
 extern float afVertices[NO_VERTICES_MAX*3];
-extern int auiIndices[NO_VERTICES_MAX*2];
+extern int auiIndices[NO_VERTICES_MAX*3];
 
 extern int m_iNoVertices;
 extern int m_iNoFaces;
