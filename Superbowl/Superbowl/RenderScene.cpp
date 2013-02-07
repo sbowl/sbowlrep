@@ -131,4 +131,7 @@ RenderScene::Refinement()
 	//cRendererA.Refinement();
 	/* oder doch das andere? */
 	cRendererB.Refinement();
+
+	/* re-render scene */
+	render_scene();
 }
