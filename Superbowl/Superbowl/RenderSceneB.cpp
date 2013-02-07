@@ -64,6 +64,7 @@ void RenderSceneB::RefinementStep()
 
 #ifdef DEBUG
 	fp = fopen("debug.log", "w");
+	fprintf(fp, "initialisierung der bigfaces:\n");
 #endif
 
 	/* transverse all faces, turn each one into 4 new ones */
@@ -98,7 +99,7 @@ void RenderSceneB::RefinementStep()
 #endif
 	}
 #ifdef DEBUG
-	fprintf(fp, "--------------------------------\n", i);
+	fprintf(fp, "--------------------------------\nbigfaces:\n", i);
 #endif
 
 	/* neue vertices einfügen (jede kante erhält einen vertex in der mitte, wird also halbiert) */
@@ -307,6 +308,17 @@ void RenderSceneB::RefinementStep()
 		auiIndices[i * 3 * 4 + 11] = bigFace_vertices[i * 6 + 4];
 	}
 
+#endif
+
+#ifdef DEBUG
+	fprintf(fp, "--------------------------------\nneue faces:\n", i);
+	for (i = 0; i < m_iNoFaces; i++) {
+		fprintf(fp, "  f%d:  ", i);
+		for (j = 0; j < 3; j++) {
+			fprintf(fp, "%d ", auiIndices[i * 3 + j]);
+		}
+		fprintf(fp, "\n");
+	}
 #endif
 
 	DebugDialog(L"vertices alt/neu", m_iNoVertices, m_iNoVertices);
