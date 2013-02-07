@@ -2,7 +2,7 @@
 #include "stdafx.h"
 
 /* debug.log schreiben? */
-#define DEBUG
+//#define DEBUG
 /* debug dialogfenster anzeigen? */
 //#define DEBUG_DIALOG
 
@@ -124,16 +124,16 @@ void RenderSceneB::RefinementStep()
 		if (bigFace_vertices[i * 6 + 1] == -1) {
 			bigFace_vertices[i * 6 + 1] = vertexInd;
 			/* berechne coords */
-			vInd = bigFace_vertices[i * 6];
-			vx = afVertices[vInd + 0];
-			vy = afVertices[vInd + 1];
-			vz = afVertices[vInd + 2];
+			vInd = bigFace_vertices[i * 6 + 0];
+			vx = afVertices[vInd * 3 + 0];
+			vy = afVertices[vInd * 3 + 1];
+			vz = afVertices[vInd * 3 + 2];
 			vInd = bigFace_vertices[i * 6 + 2];
-			vx = (vx + afVertices[vInd + 0]) / 2;
-			vy = (vy + afVertices[vInd + 1]) / 2;
-			vz = (vz + afVertices[vInd + 2]) / 2;
+			vx = (vx + afVertices[vInd * 3 + 0]) / 2;
+			vy = (vy + afVertices[vInd * 3 + 1]) / 2;
+			vz = (vz + afVertices[vInd * 3 + 2]) / 2;
 			/* normalize */
-#if 1 //testing
+#if 0 //testing
 			vx += (float)(rand() * 0.2);
 			vy += (float)(rand() * 0.2);
 			vz += (float)(rand() * 0.2);
@@ -153,15 +153,15 @@ void RenderSceneB::RefinementStep()
 			bigFace_vertices[i * 6 + 3] = vertexInd;
 			/* berechne coords */
 			vInd = bigFace_vertices[i * 6 + 2];
-			vx = afVertices[vInd + 0];
-			vy = afVertices[vInd + 1];
-			vz = afVertices[vInd + 2];
+			vx = afVertices[vInd * 3 + 0];
+			vy = afVertices[vInd * 3 + 1];
+			vz = afVertices[vInd * 3 + 2];
 			vInd = bigFace_vertices[i * 6 + 4];
-			vx = (vx + afVertices[vInd + 0]) / 2;
-			vy = (vy + afVertices[vInd + 1]) / 2;
-			vz = (vz + afVertices[vInd + 2]) / 2;
+			vx = (vx + afVertices[vInd * 3 + 0]) / 2;
+			vy = (vy + afVertices[vInd * 3 + 1]) / 2;
+			vz = (vz + afVertices[vInd * 3 + 2]) / 2;
 			/* normalize */
-#if 1 //testing
+#if 0 //testing
 			vx += (float)(rand() * 0.2);
 			vy += (float)(rand() * 0.2);
 			vz += (float)(rand() * 0.2);
@@ -181,15 +181,15 @@ void RenderSceneB::RefinementStep()
 			bigFace_vertices[i * 6 + 5] = vertexInd;
 			/* berechne coords */
 			vInd = bigFace_vertices[i * 6 + 4];
-			vx = afVertices[vInd + 0];
-			vy = afVertices[vInd + 1];
-			vz = afVertices[vInd + 2];
-			vInd = bigFace_vertices[i * 6];
-			vx = (vx + afVertices[vInd + 0]) / 2;
-			vy = (vy + afVertices[vInd + 1]) / 2;
-			vz = (vz + afVertices[vInd + 2]) / 2;
+			vx = afVertices[vInd * 3 + 0];
+			vy = afVertices[vInd * 3 + 1];
+			vz = afVertices[vInd * 3 + 2];
+			vInd = bigFace_vertices[i * 6 + 0];
+			vx = (vx + afVertices[vInd * 3 + 0]) / 2;
+			vy = (vy + afVertices[vInd * 3 + 1]) / 2;
+			vz = (vz + afVertices[vInd * 3 + 2]) / 2;
 			/* normalize */
-#if 1 //testing
+#if 0 //testing
 			vx += (float)(rand() * 0.2);
 			vy += (float)(rand() * 0.2);
 			vz += (float)(rand() * 0.2);
