@@ -24,7 +24,9 @@ void RenderSceneB::Refinement()
 #endif
 
 	while (refinementLevelNew > refinementLevel)
-	RefinementStep();
+		RefinementStep();
+	while (refinementLevelNew < refinementLevel)
+		DefinementStep();
 }
 
 void RenderSceneB::RefinementStep()
@@ -341,4 +343,40 @@ void RenderSceneB::RefinementStep()
 #ifdef DEBUG
 	fclose(fp);
 #endif
+}
+
+void RenderSceneB::DefinementStep()
+{
+
+#if 0 /* tatsächlich runterrechnen */
+
+	/* rebuild current iss from backed up iss, while defining 1 step */	
+	//int i, j;
+
+	/* paranoia */
+	if (m_iNoFaces < 4 * 4) {
+		refinementLevelNew = refinementLevel;
+		return;
+	}
+
+	/* transverse all faces, collapse each 4 into one */
+	m_iNoFaces /= 4;
+
+
+
+	/* we're now 1 refinement level worse than when we started */
+	refinementLevel--;
+
+#else /* neu aufbauen */
+
+	int tmp = refinementLevelNew;
+	initSettings();
+	refinementLevelNew = tmp;
+
+	/* abuse refinementStep() to just build bottom-up */
+	while (refinementLevelNew > refinementLevel)
+		RefinementStep();
+
+#endif
+
 }

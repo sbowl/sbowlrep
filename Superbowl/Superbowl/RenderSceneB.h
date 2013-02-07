@@ -15,6 +15,7 @@ public:
 
 protected:
 	void RefinementStep();
+	void DefinementStep();
 };
 
 #endif
