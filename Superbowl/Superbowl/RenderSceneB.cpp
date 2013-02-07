@@ -17,6 +17,7 @@ void RenderSceneB::Refinement()
 	RefinementStep();
 }
 
+#define DEBUG
 void RenderSceneB::RefinementStep()
 {
 
@@ -40,6 +41,11 @@ void RenderSceneB::RefinementStep()
 
 #else /* just append additional stuff to the arrays */
 	
+#ifdef DEBUG
+	/* for debugging */
+	FILE *fp;
+#endif
+
 	int i, j;
 
 	/* temporäre vars für coords */
@@ -55,6 +61,10 @@ void RenderSceneB::RefinementStep()
 		refinementLevelNew = refinementLevel;
 		return;
 	}
+
+#ifdef DEBUG
+	fp = fopen("debug.log", "w");
+#endif
 
 	/* transverse all faces, turn each one into 4 new ones */
 	m_iNoFaces *= 4;
@@ -75,15 +85,24 @@ void RenderSceneB::RefinementStep()
 
 	/* bekannte (bisherige) vertices eintragen */
 	for (i = 0; i < m_iNoFacesOld; i++) {
-		bigFace_vertices[i * 6] = auiIndices[i * 3];
+		bigFace_vertices[i * 6 + 0] = auiIndices[i * 3 + 0];
 		bigFace_vertices[i * 6 + 1] = -1;
 		bigFace_vertices[i * 6 + 2] = auiIndices[i * 3 + 1];
 		bigFace_vertices[i * 6 + 3] = -1;
 		bigFace_vertices[i * 6 + 4] = auiIndices[i * 3 + 2];
 		bigFace_vertices[i * 6 + 5] = -1;
+#ifdef DEBUG
+		fprintf(fp, "f%d:\n", i);
+		for (j = 0; j < 6; j++)
+			fprintf(fp, "  v%d = %d\n", j, bigFace_vertices[i * 6 + j]);
+#endif
 	}
+#ifdef DEBUG
+	fprintf(fp, "--------------------------------\n", i);
+#endif
+
+	/* neue vertices einfügen (jede kante erhält einen vertex in der mitte, wird also halbiert) */
 	for (i = 0; i < m_iNoFacesOld; i++) {
-		/* neue vertices einfügen (jede kante erhält einen vertex in der mitte, wird also halbiert) */
 		/* jeden vertex in der kantenmitte berechnen und auf radius normalisieren */
 
 		/* struktur:
@@ -99,11 +118,11 @@ void RenderSceneB::RefinementStep()
 			bigFace_vertices[i * 6 + 1] = vertexInd;
 			/* berechne coords */
 			vInd = bigFace_vertices[i * 6];
-			vx = afVertices[vInd];
+			vx = afVertices[vInd + 0];
 			vy = afVertices[vInd + 1];
 			vz = afVertices[vInd + 2];
 			vInd = bigFace_vertices[i * 6 + 2];
-			vx = (vx + afVertices[vInd]) / 2;
+			vx = (vx + afVertices[vInd + 0]) / 2;
 			vy = (vy + afVertices[vInd + 1]) / 2;
 			vz = (vz + afVertices[vInd + 2]) / 2;
 			/* normalize */
@@ -115,7 +134,7 @@ void RenderSceneB::RefinementStep()
 			//..
 #endif
 			/* neuen vertex speichern */
-			afVertices[vertexInd * 3] = vx;
+			afVertices[vertexInd * 3 + 0] = vx;
 			afVertices[vertexInd * 3 + 1] = vy;
 			afVertices[vertexInd * 3 + 2] = vz;
 
@@ -127,11 +146,11 @@ void RenderSceneB::RefinementStep()
 			bigFace_vertices[i * 6 + 3] = vertexInd;
 			/* berechne coords */
 			vInd = bigFace_vertices[i * 6 + 2];
-			vx = afVertices[vInd];
+			vx = afVertices[vInd + 0];
 			vy = afVertices[vInd + 1];
 			vz = afVertices[vInd + 2];
 			vInd = bigFace_vertices[i * 6 + 4];
-			vx = (vx + afVertices[vInd]) / 2;
+			vx = (vx + afVertices[vInd + 0]) / 2;
 			vy = (vy + afVertices[vInd + 1]) / 2;
 			vz = (vz + afVertices[vInd + 2]) / 2;
 			/* normalize */
@@ -143,7 +162,7 @@ void RenderSceneB::RefinementStep()
 			//..
 #endif
 			/* neuen vertex speichern */
-			afVertices[vertexInd * 3] = vx;
+			afVertices[vertexInd * 3 + 0] = vx;
 			afVertices[vertexInd * 3 + 1] = vy;
 			afVertices[vertexInd * 3 + 2] = vz;
 
@@ -155,11 +174,11 @@ void RenderSceneB::RefinementStep()
 			bigFace_vertices[i * 6 + 5] = vertexInd;
 			/* berechne coords */
 			vInd = bigFace_vertices[i * 6 + 4];
-			vx = afVertices[vInd];
+			vx = afVertices[vInd + 0];
 			vy = afVertices[vInd + 1];
 			vz = afVertices[vInd + 2];
 			vInd = bigFace_vertices[i * 6];
-			vx = (vx + afVertices[vInd]) / 2;
+			vx = (vx + afVertices[vInd + 0]) / 2;
 			vy = (vy + afVertices[vInd + 1]) / 2;
 			vz = (vz + afVertices[vInd + 2]) / 2;
 			/* normalize */
@@ -171,7 +190,7 @@ void RenderSceneB::RefinementStep()
 			//..
 #endif
 			/* neuen vertex speichern */
-			afVertices[vertexInd * 3] = vx;
+			afVertices[vertexInd * 3 + 0] = vx;
 			afVertices[vertexInd * 3 + 1] = vy;
 			afVertices[vertexInd * 3 + 2] = vz;
 
@@ -182,24 +201,81 @@ void RenderSceneB::RefinementStep()
 		falls angrenzend an dieselbe betroffene Kante */
 		for (j = i + 1; j < m_iNoFacesOld; j++) {
 			/* check edge 1 of this face */
-			if (bigFace_vertices[j * 6 + 1] == -1 &&
-				auiIndices[j * 3] == auiIndices[i * 3] &&
-				auiIndices[j * 3 + 1] == auiIndices[i * 3 + 1]) {
-					bigFace_vertices[j * 6 + 1] = bigFace_vertices[i * 6 + 1];
+			if (bigFace_vertices[j * 6 + 1] == -1) {
+				/* check for all 3 vertices we inserted */
+				if (bigFace_vertices[j * 6 + 0] == bigFace_vertices[i * 6 + 0]) {
+					/* check both directions: edges aren't directional! */
+					if (bigFace_vertices[j * 6 + 2] == bigFace_vertices[i * 6 + 2])
+						bigFace_vertices[j * 6 + 1] = bigFace_vertices[i * 6 + 1];
+					else if (bigFace_vertices[j * 6 + 2] == bigFace_vertices[i * 6 + 4])
+						bigFace_vertices[j * 6 + 1] = bigFace_vertices[i * 6 + 5];
+				} else if (bigFace_vertices[j * 6 + 0] == bigFace_vertices[i * 6 + 2]) {
+					/* check both directions: edges aren't directional! */
+					if (bigFace_vertices[j * 6 + 2] == bigFace_vertices[i * 6 + 0])
+						bigFace_vertices[j * 6 + 1] = bigFace_vertices[i * 6 + 1];
+					else if (bigFace_vertices[j * 6 + 2] == bigFace_vertices[i * 6 + 4])
+						bigFace_vertices[j * 6 + 1] = bigFace_vertices[i * 6 + 3];
+				} else if (bigFace_vertices[j * 6 + 0] == bigFace_vertices[i * 6 + 4]) {
+					/* check both directions: edges aren't directional! */
+					if (bigFace_vertices[j * 6 + 2] == bigFace_vertices[i * 6 + 0])
+						bigFace_vertices[j * 6 + 1] = bigFace_vertices[i * 6 + 5];
+					else if (bigFace_vertices[j * 6 + 2] == bigFace_vertices[i * 6 + 2])
+						bigFace_vertices[j * 6 + 1] = bigFace_vertices[i * 6 + 3];
+				}
 			}
 			/* check edge 2 of this face */
-			if (bigFace_vertices[j * 6 + 3] == -1 &&
-				auiIndices[j * 3 + 1] == auiIndices[i * 3 + 1] &&
-				auiIndices[j * 3 + 2] == auiIndices[i * 3 + 2]) {
-					bigFace_vertices[j * 6 + 3] = bigFace_vertices[i * 6 + 3];
+			if (bigFace_vertices[j * 6 + 3] == -1) {
+				/* check for all 3 vertices we inserted */
+				if (bigFace_vertices[j * 6 + 2] == bigFace_vertices[i * 6 + 2]) {
+					/* check both directions: edges aren't directional! */
+					if (bigFace_vertices[j * 6 + 4] == bigFace_vertices[i * 6 + 4])
+						bigFace_vertices[j * 6 + 3] = bigFace_vertices[i * 6 + 3];
+					else if (bigFace_vertices[j * 6 + 4] == bigFace_vertices[i * 6 + 0])
+						bigFace_vertices[j * 6 + 3] = bigFace_vertices[i * 6 + 1];
+				} else if (bigFace_vertices[j * 6 + 2] == bigFace_vertices[i * 6 + 0]) {
+					/* check both directions: edges aren't directional! */
+					if (bigFace_vertices[j * 6 + 4] == bigFace_vertices[i * 6 + 2])
+						bigFace_vertices[j * 6 + 3] = bigFace_vertices[i * 6 + 1];
+					else if (bigFace_vertices[j * 6 + 4] == bigFace_vertices[i * 6 + 4])
+						bigFace_vertices[j * 6 + 3] = bigFace_vertices[i * 6 + 5];
+				} else if (bigFace_vertices[j * 6 + 2] == bigFace_vertices[i * 6 + 4]) {
+					/* check both directions: edges aren't directional! */
+					if (bigFace_vertices[j * 6 + 4] == bigFace_vertices[i * 6 + 0])
+						bigFace_vertices[j * 6 + 3] = bigFace_vertices[i * 6 + 5];
+					else if (bigFace_vertices[j * 6 + 4] == bigFace_vertices[i * 6 + 2])
+						bigFace_vertices[j * 6 + 3] = bigFace_vertices[i * 6 + 3];
+				}
 			}
 			/* check edge 3 of this face */
-			if (bigFace_vertices[j * 6 + 5] == -1 &&
-				auiIndices[j * 3 + 2] == auiIndices[i * 3 + 2] &&
-				auiIndices[j * 3] == auiIndices[i * 3]) {
-					bigFace_vertices[j * 6 + 5] = bigFace_vertices[i * 6 + 5];
+			if (bigFace_vertices[j * 6 + 5] == -1) {
+				/* check for all 3 vertices we inserted */
+				if (bigFace_vertices[j * 6 + 4] == bigFace_vertices[i * 6 + 4]) {
+					/* check both directions: edges aren't directional! */
+					if (bigFace_vertices[j * 6 + 0] == bigFace_vertices[i * 6 + 0])
+						bigFace_vertices[j * 6 + 5] = bigFace_vertices[i * 6 + 5];
+					else if (bigFace_vertices[j * 6 + 0] == bigFace_vertices[i * 6 + 2])
+						bigFace_vertices[j * 6 + 5] = bigFace_vertices[i * 6 + 3];
+				} else if (bigFace_vertices[j * 6 + 4] == bigFace_vertices[i * 6 + 0]) {
+					/* check both directions: edges aren't directional! */
+					if (bigFace_vertices[j * 6 + 0] == bigFace_vertices[i * 6 + 2])
+						bigFace_vertices[j * 6 + 5] = bigFace_vertices[i * 6 + 1];
+					else if (bigFace_vertices[j * 6 + 0] == bigFace_vertices[i * 6 + 4])
+						bigFace_vertices[j * 6 + 5] = bigFace_vertices[i * 6 + 5];
+				} else if (bigFace_vertices[j * 6 + 4] == bigFace_vertices[i * 6 + 2]) {
+					/* check both directions: edges aren't directional! */
+					if (bigFace_vertices[j * 6 + 0] == bigFace_vertices[i * 6 + 4])
+						bigFace_vertices[j * 6 + 5] = bigFace_vertices[i * 6 + 3];
+					else if (bigFace_vertices[j * 6 + 0] == bigFace_vertices[i * 6 + 0])
+						bigFace_vertices[j * 6 + 5] = bigFace_vertices[i * 6 + 1];
+				}
 			}
 		}
+
+#ifdef DEBUG
+		fprintf(fp, "f%d:\n", i);
+		for (j = 0; j < 6; j++)
+			fprintf(fp, "  v%d = %d\n", j, bigFace_vertices[i * 6 + j]);
+#endif
 	}
 
 	/* update # of vertices we got now */
@@ -214,7 +290,7 @@ void RenderSceneB::RefinementStep()
 	*/
 	for (i = 0; i < m_iNoFacesOld; i++) {
 		/* generate 4 faces from each big face */
-		auiIndices[i * 3 * 4] = bigFace_vertices[i * 6];
+		auiIndices[i * 3 * 4 + 0] = bigFace_vertices[i * 6 + 0];
 		auiIndices[i * 3 * 4 + 1] = bigFace_vertices[i * 6 + 1];
 		auiIndices[i * 3 * 4 + 2] = bigFace_vertices[i * 6 + 5];
 
@@ -238,4 +314,8 @@ void RenderSceneB::RefinementStep()
 
 	/* we're now 1 refinement level better than when we started */
 	refinementLevel++;
+
+#ifdef DEBUG
+	fclose(fp);
+#endif
 }
