@@ -5,27 +5,13 @@ RenderSceneB::RenderSceneB()
 {
 }
 
-#define REFINEMENT_DEBUG
 void RenderSceneB::Refinement()
 {
-#ifdef REFINEMENT_DEBUG
-	wchar_t txt1[100];
-	char txt2[100];
-	int cp = -1;
-#endif
 	
 	if (refinementLevelNew < 0) refinementLevelNew = 0;
 	if (refinementLevelNew > 10) refinementLevelNew = 10;
 
-#ifdef REFINEMENT_DEBUG
-	sprintf(txt2, "%d,%d", refinementLevel, refinementLevelNew);
-	/* convert char to wchar_t ... */
-	do {
-			cp++;
-			txt1[cp] = txt2[cp];
-	} while(txt2[cp]);
-	MessageBox(HWND_DESKTOP,txt1,L"refinementLevel(New)",MB_OK);
-#endif
+	DebugDialog(L"refine alt/neu", refinementLevel, refinementLevelNew);
 
 	while (refinementLevelNew > refinementLevel)
 	RefinementStep();
@@ -60,6 +46,7 @@ void RenderSceneB::RefinementStep()
 	int vInd;
 	float vx, vy, vz;
 
+	int m_iNoVerticesOld = m_iNoVertices;
 	int vertexInd = m_iNoVertices - 1;
 	int m_iNoFacesOld = m_iNoFaces;
 
@@ -222,6 +209,27 @@ void RenderSceneB::RefinementStep()
 
 #endif
 
+	DebugDialog(L"vertices alt/neu", m_iNoVertices, m_iNoVertices);
+	DebugDialog(L"faces alt/neu", m_iNoFacesOld, m_iNoFaces);
+
 	/* we're now 1 refinement level better than when we started */
 	refinementLevel++;
+}
+
+void RenderSceneB::DebugDialog(wchar_t *title, int num1, int num2) {
+	wchar_t txt1[100];
+	char txt2[100];
+	int cp = -1;
+
+	/* sprintf verlangt char.. */
+	sprintf(txt2, "%d,%d", num1, num2);
+
+	/* convert char to wchar_t... */
+	do {
+			cp++;
+			txt1[cp] = txt2[cp];
+	} while(txt2[cp]);
+
+	/* msgbox verlangt wchar_t.... */
+	MessageBox(HWND_DESKTOP, txt1, title, MB_OK);
 }
