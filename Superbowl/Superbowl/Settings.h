@@ -23,7 +23,8 @@ extern int m_iNoFaces;
 
 extern int refinementLevelNew;
 extern int refinementLevel;
-  
+
+extern void initSettings(void);
 
 //Texture
 const unsigned int TEXTURE_WIDTH  = 256;

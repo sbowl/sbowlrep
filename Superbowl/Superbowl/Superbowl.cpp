@@ -47,6 +47,8 @@ int main(int argc, char* argv[])
   const unsigned int uiWidth = 800;
   const unsigned int uiHeight = 600;
 
+  initSettings();
+
   glutInit( &argc, argv );				                              // initialize library
   glutInitWindowSize( uiWidth, uiHeight );			                // set desired window size
   cRenderer.setWindowSize( uiWidth, uiHeight );

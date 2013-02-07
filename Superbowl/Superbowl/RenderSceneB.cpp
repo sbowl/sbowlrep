@@ -108,9 +108,9 @@ void RenderSceneB::RefinementStep()
 			vz = (vz + afVertices[vInd + 2]) / 2;
 			/* normalize */
 #if 1 //testing
-			vx += rand() * 0.2;
-			vy += rand() * 0.2;
-			vz += rand() * 0.2;
+			vx += (float)(rand() * 0.2);
+			vy += (float)(rand() * 0.2);
+			vz += (float)(rand() * 0.2);
 #else
 			//..
 #endif
@@ -134,9 +134,9 @@ void RenderSceneB::RefinementStep()
 			vz = (vz + afVertices[vInd + 2]) / 2;
 			/* normalize */
 #if 1 //testing
-			vx += rand() * 0.2;
-			vy += rand() * 0.2;
-			vz += rand() * 0.2;
+			vx += (float)(rand() * 0.2);
+			vy += (float)(rand() * 0.2);
+			vz += (float)(rand() * 0.2);
 #else
 			//..
 #endif
@@ -160,9 +160,9 @@ void RenderSceneB::RefinementStep()
 			vz = (vz + afVertices[vInd + 2]) / 2;
 			/* normalize */
 #if 1 //testing
-			vx += rand() * 0.2;
-			vy += rand() * 0.2;
-			vz += rand() * 0.2;
+			vx += (float)(rand() * 0.2);
+			vy += (float)(rand() * 0.2);
+			vz += (float)(rand() * 0.2);
 #else
 			//..
 #endif
