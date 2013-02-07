@@ -215,21 +215,3 @@ void RenderSceneB::RefinementStep()
 	/* we're now 1 refinement level better than when we started */
 	refinementLevel++;
 }
-
-void RenderSceneB::DebugDialog(wchar_t *title, int num1, int num2) {
-	wchar_t txt1[100];
-	char txt2[100];
-	int cp = -1;
-
-	/* sprintf verlangt char.. */
-	sprintf(txt2, "%d,%d", num1, num2);
-
-	/* convert char to wchar_t... */
-	do {
-			cp++;
-			txt1[cp] = txt2[cp];
-	} while(txt2[cp]);
-
-	/* msgbox verlangt wchar_t.... */
-	MessageBox(HWND_DESKTOP, txt1, title, MB_OK);
-}

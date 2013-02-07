@@ -7,6 +7,7 @@
 
 // TODO: Hier auf zusätzliche Header, die das Programm erfordert, verweisen.
 
+#include "Superbowl.h"
 #include "Settings.h"
 #include "RenderSceneA.h"
 #include "RenderSceneB.h"

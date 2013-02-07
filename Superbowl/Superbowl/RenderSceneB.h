@@ -15,7 +15,6 @@ public:
 
 protected:
 	void RefinementStep();
-	void DebugDialog(wchar_t*, int, int);
 };
 
 #endif

@@ -23,6 +23,24 @@ void keyboardCallback( unsigned char key, int x, int y);
 // uncomment to render a particular scene
 RenderScene	 cRenderer;
 
+void DebugDialog(wchar_t *title, int num1, int num2) {
+	wchar_t txt1[100];
+	char txt2[100];
+	int cp = -1;
+
+	/* sprintf verlangt char.. */
+	sprintf_s(txt2, "%d,%d", num1, num2);
+
+	/* convert char to wchar_t... */
+	do {
+			cp++;
+			txt1[cp] = txt2[cp];
+	} while(txt2[cp]);
+
+	/* msgbox verlangt wchar_t.... */
+	MessageBox(HWND_DESKTOP, txt1, title, MB_OK);
+}
+
 int main(int argc, char* argv[])
 {
   int win;

@@ -60,6 +60,9 @@
     <ClInclude Include="Settings.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Superbowl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">
