@@ -38,6 +38,11 @@ void RenderSceneB::RefinementStep()
 #else /* just append additional stuff to the arrays */
 	
 	int i, j;
+
+	/* temporäre vars für coords */
+	int vInd;
+	float vx, vy, vz;
+
 	int vertexInd = m_iNoVertices - 1;
 	int m_iNoFacesOld = m_iNoFaces;
 
@@ -89,30 +94,60 @@ void RenderSceneB::RefinementStep()
 		if (bigFace_vertices[i * 6 + 1] == -1) {
 			bigFace_vertices[i * 6 + 1] = ++vertexInd;
 			/* berechne coords */
-			//...
-			//afVertices[vertexInd * 3] = x;
-			//afVertices[vertexInd * 3 + 1] = y;
-			//afVertices[vertexInd * 3 + 2] = z;
+			vInd = bigFace_vertices[i * 6];
+			vx = afVertices[vInd];
+			vy = afVertices[vInd + 1];
+			vz = afVertices[vInd + 2];
+			vInd = bigFace_vertices[i * 6 + 2];
+			vx = (vx + afVertices[vInd]) / 2;
+			vy = (vy + afVertices[vInd + 1]) / 2;
+			vz = (vz + afVertices[vInd + 2]) / 2;
+			/* normalize */
+			//..
+			/* neuen vertex speichern */
+			afVertices[vertexInd * 3] = vx;
+			afVertices[vertexInd * 3 + 1] = vy;
+			afVertices[vertexInd * 3 + 2] = vz;
 		}
 
 		/* füge ein falls noch nicht vorhanden */
 		if (bigFace_vertices[i * 6 + 3] == -1) {
 			bigFace_vertices[i * 6 + 3] = ++vertexInd;
 			/* berechne coords */
-			//...
-			//afVertices[vertexInd * 3] = x;
-			//afVertices[vertexInd * 3 + 1] = y;
-			//afVertices[vertexInd * 3 + 2] = z;
+			vInd = bigFace_vertices[i * 6 + 2];
+			vx = afVertices[vInd];
+			vy = afVertices[vInd + 1];
+			vz = afVertices[vInd + 2];
+			vInd = bigFace_vertices[i * 6 + 4];
+			vx = (vx + afVertices[vInd]) / 2;
+			vy = (vy + afVertices[vInd + 1]) / 2;
+			vz = (vz + afVertices[vInd + 2]) / 2;
+			/* normalize */
+			//..
+			/* neuen vertex speichern */
+			afVertices[vertexInd * 3] = vx;
+			afVertices[vertexInd * 3 + 1] = vy;
+			afVertices[vertexInd * 3 + 2] = vz;
 		}
 
 		/* füge ein falls noch nicht vorhanden */
 		if (bigFace_vertices[i * 6 + 5] == -1) {
 			bigFace_vertices[i * 6 + 5] = ++vertexInd;
 			/* berechne coords */
-			//...
-			//afVertices[vertexInd * 3] = x;
-			//afVertices[vertexInd * 3 + 1] = y;
-			//afVertices[vertexInd * 3 + 2] = z;
+			vInd = bigFace_vertices[i * 6 + 4];
+			vx = afVertices[vInd];
+			vy = afVertices[vInd + 1];
+			vz = afVertices[vInd + 2];
+			vInd = bigFace_vertices[i * 6];
+			vx = (vx + afVertices[vInd]) / 2;
+			vy = (vy + afVertices[vInd + 1]) / 2;
+			vz = (vz + afVertices[vInd + 2]) / 2;
+			/* normalize */
+			//..
+			/* neuen vertex speichern */
+			afVertices[vertexInd * 3] = vx;
+			afVertices[vertexInd * 3 + 1] = vy;
+			afVertices[vertexInd * 3 + 2] = vz;
 		}
 
 		/* über bisher unbekannte flächen iterieren und dort die vertices auch gleich eintragen,
@@ -132,22 +167,40 @@ void RenderSceneB::RefinementStep()
 			}
 			/* check edge 3 of this face */
 			if (bigFace_vertices[j * 6 + 5] == -1 &&
-				auiIndices[j * 3] == auiIndices[i * 3] &&
-				auiIndices[j * 3 + 2] == auiIndices[i * 3 + 2]) {
+				auiIndices[j * 3 + 2] == auiIndices[i * 3 + 2] &&
+				auiIndices[j * 3] == auiIndices[i * 3]) {
 					bigFace_vertices[j * 6 + 5] = bigFace_vertices[i * 6 + 5];
 			}
 		}
 	}
+
 	/* update # of vertices we got now */
 	m_iNoVertices = vertexInd + 1;
 
 	/* generate new faces array from our temporary bigFaces array:
-	                   /\
-					  /__\
-					 / \/ \
-					´´´´´´´		  */
+				+0			/\
+				/\		   /\/\
+			  +5  +1	   ````
+			  /_+3_\
+			+4      +2
+	*/
 	for (i = 0; i < m_iNoFacesOld; i++) {
-		//..
+		/* generate 4 faces from each big face */
+		auiIndices[i * 3 * 4] = bigFace_vertices[i * 6];
+		auiIndices[i * 3 * 4 + 1] = bigFace_vertices[i * 6 + 1];
+		auiIndices[i * 3 * 4 + 2] = bigFace_vertices[i * 6 + 5];
+
+		auiIndices[i * 3 * 4 + 3] = bigFace_vertices[i * 6 + 1];
+		auiIndices[i * 3 * 4 + 4] = bigFace_vertices[i * 6 + 2];
+		auiIndices[i * 3 * 4 + 5] = bigFace_vertices[i * 6 + 3];
+
+		auiIndices[i * 3 * 4 + 6] = bigFace_vertices[i * 6 + 1];
+		auiIndices[i * 3 * 4 + 7] = bigFace_vertices[i * 6 + 3];
+		auiIndices[i * 3 * 4 + 8] = bigFace_vertices[i * 6 + 5];
+
+		auiIndices[i * 3 * 4 + 9] = bigFace_vertices[i * 6 + 5];
+		auiIndices[i * 3 * 4 + 10] = bigFace_vertices[i * 6 + 3];
+		auiIndices[i * 3 * 4 + 11] = bigFace_vertices[i * 6 + 4];
 	}
 
 #endif
