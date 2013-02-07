@@ -90,11 +90,11 @@ void RenderScene::render_scene()
   glLoadIdentity();
   glColor3f( 1.0f, 1.0f, 1.0f );
 
-  glVertexPointer( 3, GL_FLOAT, 0, afBasicVertices ); // set pointer to vertex data
-  glNormalPointer( GL_FLOAT, 0, afBasicVertices ); // set pointer to normal data
+  glVertexPointer( 3, GL_FLOAT, 0, afVertices ); // set pointer to vertex data
+  glNormalPointer( GL_FLOAT, 0, afVertices ); // set pointer to normal data
   glEnableClientState( GL_VERTEX_ARRAY ); // enable vertex and normal pointer
   glEnableClientState( GL_NORMAL_ARRAY );
-  glDrawElements( GL_TRIANGLES, NO_BASIC_FACES*3, GL_UNSIGNED_INT, auiBasicIndices ); // draw polygons
+  glDrawElements( GL_TRIANGLES, m_iNoFaces*3, GL_UNSIGNED_INT, auiIndices ); // draw polygons
 
   cRendererA.Plane();
 
