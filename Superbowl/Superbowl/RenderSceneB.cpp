@@ -6,7 +6,7 @@
 /* debug dialogfenster anzeigen? */
 //#define DEBUG_DIALOG
 /* neu erzeugte vertices zuf‰llig variieren um eine sichtbare auﬂenstruktur zu erzeugen? */
-#define DEBUG_VERTS
+//#define DEBUG_VERTS
 #define DEBUG_VERTS_VAL ((float)((rand() % 100) * 0.002))
 
 RenderSceneB::RenderSceneB()
@@ -29,30 +29,13 @@ void RenderSceneB::Refinement()
 
 void RenderSceneB::RefinementStep()
 {
-
-#if 0 /* we're gonna rebuild the arrays from scratch? */
-
-	int i;
-	float afVerticesOld[NO_VERTICES_MAX*3];
-	int auiIndicesOld[NO_FACES_MAX*3];
-
-	/* backup current indexed shape set */
-	for (i = 0; i < NO_VERTICES_MAX*3; i++)
-		afVerticesOld[i] = afVertices[i];
-	for (i = 0; i < NO_FACES_MAX*3; i++)
-		auiIndicesOld[i = auiIndices[i];
-	
-	/* reset current indexed shape set */
-	m_iNoVertices = 0;
-	m_iNoFaces = 0;
-
-	/* rebuild current iss from backed up iss, while refining 1 step */
-
-#else /* just append additional stuff to the arrays */
-	
+	/* rebuild current iss from backed up iss, while refining 1 step */	
 #ifdef DEBUG
 	/* for debugging */
 	FILE *fp;
+#endif
+#ifndef DEBUG_VERTS
+	float vlen; //f¸r vektor-normalisierung
 #endif
 
 	int i, j;
@@ -141,7 +124,13 @@ void RenderSceneB::RefinementStep()
 			vy += DEBUG_VERTS_VAL;
 			vz += DEBUG_VERTS_VAL;
 #else
-			//..
+			vx *= 2;
+			vy *= 2;
+			vz *= 2;
+			vlen = sqrtf(vx*vx + vy*vy + vz*vz);
+			vx = vx / vlen;
+			vy = vy / vlen;
+			vz = vz / vlen;
 #endif
 			/* neuen vertex speichern */
 			afVertices[vertexInd * 3 + 0] = vx;
@@ -169,7 +158,13 @@ void RenderSceneB::RefinementStep()
 			vy += DEBUG_VERTS_VAL;
 			vz += DEBUG_VERTS_VAL;
 #else
-			//..
+			vx *= 2;
+			vy *= 2;
+			vz *= 2;
+			vlen = sqrtf(vx*vx + vy*vy + vz*vz);
+			vx = vx / vlen;
+			vy = vy / vlen;
+			vz = vz / vlen;
 #endif
 			/* neuen vertex speichern */
 			afVertices[vertexInd * 3 + 0] = vx;
@@ -197,7 +192,13 @@ void RenderSceneB::RefinementStep()
 			vy += DEBUG_VERTS_VAL;
 			vz += DEBUG_VERTS_VAL;
 #else
-			//..
+			vx *= 2;
+			vy *= 2;
+			vz *= 2;
+			vlen = sqrtf(vx*vx + vy*vy + vz*vz);
+			vx = vx / vlen;
+			vy = vy / vlen;
+			vz = vz / vlen;
 #endif
 			/* neuen vertex speichern */
 			afVertices[vertexInd * 3 + 0] = vx;
@@ -316,8 +317,6 @@ void RenderSceneB::RefinementStep()
 		auiIndices[i * 3 * 4 + 10] = bigFace_vertices[i * 6 + 3];
 		auiIndices[i * 3 * 4 + 11] = bigFace_vertices[i * 6 + 4];
 	}
-
-#endif
 
 #ifdef DEBUG
 	fprintf(fp, "--------------------------------\nneue faces:\n", i);
