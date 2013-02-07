@@ -5,6 +5,9 @@
 //#define DEBUG
 /* debug dialogfenster anzeigen? */
 //#define DEBUG_DIALOG
+/* neu erzeugte vertices zuf‰llig variieren um eine sichtbare auﬂenstruktur zu erzeugen? */
+#define DEBUG_VERTS
+#define DEBUG_VERTS_VAL ((float)((rand() % 100) * 0.002))
 
 RenderSceneB::RenderSceneB()
 {
@@ -133,10 +136,10 @@ void RenderSceneB::RefinementStep()
 			vy = (vy + afVertices[vInd * 3 + 1]) / 2;
 			vz = (vz + afVertices[vInd * 3 + 2]) / 2;
 			/* normalize */
-#if 0 //testing
-			vx += (float)(rand() * 0.2);
-			vy += (float)(rand() * 0.2);
-			vz += (float)(rand() * 0.2);
+#ifdef DEBUG_VERTS //testing
+			vx += DEBUG_VERTS_VAL;
+			vy += DEBUG_VERTS_VAL;
+			vz += DEBUG_VERTS_VAL;
 #else
 			//..
 #endif
@@ -161,10 +164,10 @@ void RenderSceneB::RefinementStep()
 			vy = (vy + afVertices[vInd * 3 + 1]) / 2;
 			vz = (vz + afVertices[vInd * 3 + 2]) / 2;
 			/* normalize */
-#if 0 //testing
-			vx += (float)(rand() * 0.2);
-			vy += (float)(rand() * 0.2);
-			vz += (float)(rand() * 0.2);
+#ifdef DEBUG_VERTS //testing
+			vx += DEBUG_VERTS_VAL;
+			vy += DEBUG_VERTS_VAL;
+			vz += DEBUG_VERTS_VAL;
 #else
 			//..
 #endif
@@ -189,10 +192,10 @@ void RenderSceneB::RefinementStep()
 			vy = (vy + afVertices[vInd * 3 + 1]) / 2;
 			vz = (vz + afVertices[vInd * 3 + 2]) / 2;
 			/* normalize */
-#if 0 //testing
-			vx += (float)(rand() * 0.2);
-			vy += (float)(rand() * 0.2);
-			vz += (float)(rand() * 0.2);
+#ifdef DEBUG_VERTS //testing
+			vx += DEBUG_VERTS_VAL;
+			vy += DEBUG_VERTS_VAL;
+			vz += DEBUG_VERTS_VAL;
 #else
 			//..
 #endif
