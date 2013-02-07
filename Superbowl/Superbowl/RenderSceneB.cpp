@@ -107,7 +107,13 @@ void RenderSceneB::RefinementStep()
 			vy = (vy + afVertices[vInd + 1]) / 2;
 			vz = (vz + afVertices[vInd + 2]) / 2;
 			/* normalize */
+#if 1 //testing
+			vx += rand() * 0.2;
+			vy += rand() * 0.2;
+			vz += rand() * 0.2;
+#else
 			//..
+#endif
 			/* neuen vertex speichern */
 			afVertices[vertexInd * 3] = vx;
 			afVertices[vertexInd * 3 + 1] = vy;
@@ -127,7 +133,13 @@ void RenderSceneB::RefinementStep()
 			vy = (vy + afVertices[vInd + 1]) / 2;
 			vz = (vz + afVertices[vInd + 2]) / 2;
 			/* normalize */
+#if 1 //testing
+			vx += rand() * 0.2;
+			vy += rand() * 0.2;
+			vz += rand() * 0.2;
+#else
 			//..
+#endif
 			/* neuen vertex speichern */
 			afVertices[vertexInd * 3] = vx;
 			afVertices[vertexInd * 3 + 1] = vy;
@@ -147,7 +159,13 @@ void RenderSceneB::RefinementStep()
 			vy = (vy + afVertices[vInd + 1]) / 2;
 			vz = (vz + afVertices[vInd + 2]) / 2;
 			/* normalize */
+#if 1 //testing
+			vx += rand() * 0.2;
+			vy += rand() * 0.2;
+			vz += rand() * 0.2;
+#else
 			//..
+#endif
 			/* neuen vertex speichern */
 			afVertices[vertexInd * 3] = vx;
 			afVertices[vertexInd * 3 + 1] = vy;
