@@ -1,6 +1,11 @@
 /* extra stuff from doodb */
 #include "stdafx.h"
 
+/* debug.log schreiben? */
+#define DEBUG
+/* debug dialogfenster anzeigen? */
+//#define DEBUG_DIALOG
+
 RenderSceneB::RenderSceneB()
 {
 }
@@ -11,13 +16,14 @@ void RenderSceneB::Refinement()
 	if (refinementLevelNew < 0) refinementLevelNew = 0;
 	if (refinementLevelNew > 10) refinementLevelNew = 10;
 
+#ifdef DEBUG_DIALOG
 	DebugDialog(L"refine alt/neu", refinementLevel, refinementLevelNew);
+#endif
 
 	while (refinementLevelNew > refinementLevel)
 	RefinementStep();
 }
 
-#define DEBUG
 void RenderSceneB::RefinementStep()
 {
 
@@ -318,11 +324,14 @@ void RenderSceneB::RefinementStep()
 			fprintf(fp, "%d ", auiIndices[i * 3 + j]);
 		}
 		fprintf(fp, "\n");
+		if ((i + 1) % 4 == 0) fprintf(fp, "\n");
 	}
 #endif
 
+#ifdef DEBUG_DIALOG
 	DebugDialog(L"vertices alt/neu", m_iNoVertices, m_iNoVertices);
 	DebugDialog(L"faces alt/neu", m_iNoFacesOld, m_iNoFaces);
+#endif
 
 	/* we're now 1 refinement level better than when we started */
 	refinementLevel++;
