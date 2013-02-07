@@ -24,7 +24,12 @@ extern int m_iNoFaces;
 extern int refinementLevelNew;
 extern int refinementLevel;
   
+
+//Texture
 const unsigned int TEXTURE_WIDTH  = 256;
 const unsigned int TEXTURE_HEIGHT = 256;
 
+
+//Compile
+#define _CRT_SECURE_NO_WARNINGS 1
 #endif

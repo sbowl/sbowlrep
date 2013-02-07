@@ -90,40 +90,13 @@ void RenderScene::render_scene()
   glLoadIdentity();
   glColor3f( 1.0f, 1.0f, 1.0f );
 
-  // set pointer to vertex data
-  glVertexPointer( 3, GL_FLOAT, 0, afBasicVertices );
-  // set pointer to normal data
-  glNormalPointer( GL_FLOAT, 0, afBasicVertices );
-  // enable vertex and normal pointer
-  glEnableClientState( GL_VERTEX_ARRAY );
+  glVertexPointer( 3, GL_FLOAT, 0, afBasicVertices ); // set pointer to vertex data
+  glNormalPointer( GL_FLOAT, 0, afBasicVertices ); // set pointer to normal data
+  glEnableClientState( GL_VERTEX_ARRAY ); // enable vertex and normal pointer
   glEnableClientState( GL_NORMAL_ARRAY );
+  glDrawElements( GL_TRIANGLES, NO_BASIC_FACES*3, GL_UNSIGNED_INT, auiBasicIndices ); // draw polygons
 
-  // draw polygons
-  glDrawElements( GL_TRIANGLES, NO_BASIC_FACES*3, GL_UNSIGNED_INT, auiBasicIndices );
-
-  glLoadIdentity();                                  
-    glColor3f(0.5f,0.5f,1.0f);                         
-    glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f, -1.0f);                  
-        glVertex3f( 0.0f, -1.0f, -1.0f);                 
-        glVertex3f( 0.0f, -1.0f, 0.0f);                 
-        glVertex3f(-1.0f, -1.0f, 0.0f);                  
-    glEnd();  
-	glBegin(GL_QUADS);                         
-        glVertex3f( 0.0f, -1.0f, -1.0f);                  
-        glVertex3f( 1.0f, -1.0f, -1.0f);                 
-        glVertex3f( 1.0f, -1.0f,  0.0f);                 
-        glVertex3f( 0.0f, -1.0f,  0.0f);                  
-    glEnd(); 
-	glBegin(GL_QUADS);                         
-        glVertex3f( 0.0f, -1.0f,  0.0f);                  
-        glVertex3f( 1.0f, -1.0f,  0.0f);                 
-        glVertex3f( 1.0f, -1.0f,  1.0f);                 
-        glVertex3f( 0.0f, -1.0f,  1.0f);                  
-    glEnd(); 
-
-
-	cRendererA.TextureTest();
+  cRendererA.Plane();
 
 }
 
