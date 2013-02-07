@@ -101,13 +101,19 @@ void keyboardCallback( unsigned char key, int x, int y)
     break;
 
 	//less vertices
-  case '-':
+  case 'o':
+	  cRenderer.rotNone();
 	  refinementLevelNew = refinementLevel - 1;
+	  cRenderer.Refinement();
+	  glutPostRedisplay();				            // creates an event for redrawing (calls displayCallback() )
 	  break;
 	
 	  //moar vertices
-  case '+':
+  case 'p':
+	  cRenderer.rotNone();
 	  refinementLevelNew = refinementLevel + 1;
+	  cRenderer.Refinement();
+	  glutPostRedisplay();				            // creates an event for redrawing (calls displayCallback() )
 	  break;
   }
 }

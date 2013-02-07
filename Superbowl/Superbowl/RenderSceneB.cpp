@@ -5,13 +5,30 @@ RenderSceneB::RenderSceneB()
 {
 }
 
+#define REFINEMENT_DEBUG
 void RenderSceneB::Refinement()
 {
+#ifdef REFINEMENT_DEBUG
+	wchar_t txt1[100];
+	char txt2[100];
+	int cp = -1;
+#endif
+	
 	if (refinementLevelNew < 0) refinementLevelNew = 0;
 	if (refinementLevelNew > 10) refinementLevelNew = 10;
 
+#ifdef REFINEMENT_DEBUG
+	sprintf(txt2, "%d,%d", refinementLevel, refinementLevelNew);
+	/* convert char to wchar_t ... */
+	do {
+			cp++;
+			txt1[cp] = txt2[cp];
+	} while(txt2[cp]);
+	MessageBox(HWND_DESKTOP,txt1,L"refinementLevel(New)",MB_OK);
+#endif
+
 	while (refinementLevelNew > refinementLevel)
-		RefinementStep();
+	RefinementStep();
 }
 
 void RenderSceneB::RefinementStep()

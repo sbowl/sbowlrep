@@ -117,10 +117,18 @@ RenderScene::rotX ( float fAngle )
   }
 
 void
+RenderScene::rotNone (void) 
+  {
+	  m_fRot = 0; 
+	  m_fTurnY = 0.0;
+	  m_fTurnX = 0.0;
+  }
+
+void
 RenderScene::Refinement()
 {
 	/* Beispiel: Verwende das Refinement() von dooda */
-	cRendererA.Refinement();
+	//cRendererA.Refinement();
 	/* oder doch das andere? */
-	//cRendererB.Refinement();
+	cRendererB.Refinement();
 }

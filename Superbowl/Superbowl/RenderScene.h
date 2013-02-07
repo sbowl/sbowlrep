@@ -21,6 +21,7 @@ public:
   // rotate scene
   void rotY( float fAngle ) ;
   void rotX ( float fAngle ) ;
+  void rotNone (void);
 
   void Refinement();
 
