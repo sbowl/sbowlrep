@@ -47,7 +47,7 @@ void RenderSceneB::RefinementStep()
 	float vx, vy, vz;
 
 	int m_iNoVerticesOld = m_iNoVertices;
-	int vertexInd = m_iNoVertices - 1;
+	int vertexInd = m_iNoVertices;
 	int m_iNoFacesOld = m_iNoFaces;
 
 	/* paranoia */
@@ -96,7 +96,7 @@ void RenderSceneB::RefinementStep()
 
 		/* füge ein falls noch nicht vorhanden */
 		if (bigFace_vertices[i * 6 + 1] == -1) {
-			bigFace_vertices[i * 6 + 1] = ++vertexInd;
+			bigFace_vertices[i * 6 + 1] = vertexInd;
 			/* berechne coords */
 			vInd = bigFace_vertices[i * 6];
 			vx = afVertices[vInd];
@@ -118,11 +118,13 @@ void RenderSceneB::RefinementStep()
 			afVertices[vertexInd * 3] = vx;
 			afVertices[vertexInd * 3 + 1] = vy;
 			afVertices[vertexInd * 3 + 2] = vz;
+
+			vertexInd++;
 		}
 
 		/* füge ein falls noch nicht vorhanden */
 		if (bigFace_vertices[i * 6 + 3] == -1) {
-			bigFace_vertices[i * 6 + 3] = ++vertexInd;
+			bigFace_vertices[i * 6 + 3] = vertexInd;
 			/* berechne coords */
 			vInd = bigFace_vertices[i * 6 + 2];
 			vx = afVertices[vInd];
@@ -144,11 +146,13 @@ void RenderSceneB::RefinementStep()
 			afVertices[vertexInd * 3] = vx;
 			afVertices[vertexInd * 3 + 1] = vy;
 			afVertices[vertexInd * 3 + 2] = vz;
+
+			vertexInd++;
 		}
 
 		/* füge ein falls noch nicht vorhanden */
 		if (bigFace_vertices[i * 6 + 5] == -1) {
-			bigFace_vertices[i * 6 + 5] = ++vertexInd;
+			bigFace_vertices[i * 6 + 5] = vertexInd;
 			/* berechne coords */
 			vInd = bigFace_vertices[i * 6 + 4];
 			vx = afVertices[vInd];
@@ -170,6 +174,8 @@ void RenderSceneB::RefinementStep()
 			afVertices[vertexInd * 3] = vx;
 			afVertices[vertexInd * 3 + 1] = vy;
 			afVertices[vertexInd * 3 + 2] = vz;
+
+			vertexInd++;
 		}
 
 		/* über bisher unbekannte flächen iterieren und dort die vertices auch gleich eintragen,
@@ -197,7 +203,7 @@ void RenderSceneB::RefinementStep()
 	}
 
 	/* update # of vertices we got now */
-	m_iNoVertices = vertexInd + 1;
+	m_iNoVertices = vertexInd;
 
 	/* generate new faces array from our temporary bigFaces array:
 				+0			/\
