@@ -135,6 +135,12 @@ void keyboardCallback( unsigned char key, int x, int y)
 	  cRenderer.Refinement();
 	  glutPostRedisplay();				            // creates an event for redrawing (calls displayCallback() )
 	  break;
+  //line -> full -> textur -> line
+  case 't':
+	  cRenderer.rotNone();
+	  cRenderer.SwitchTexture();
+	  glutPostRedisplay();				            // creates an event for redrawing (calls displayCallback() )
+	  break;
   }
 }
 
