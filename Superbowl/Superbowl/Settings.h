@@ -31,6 +31,7 @@ const unsigned int TEXTURE_WIDTH  = 256;
 const unsigned int TEXTURE_HEIGHT = 256;
 
 
+
 //Compile
 #define _CRT_SECURE_NO_WARNINGS 1
 #endif

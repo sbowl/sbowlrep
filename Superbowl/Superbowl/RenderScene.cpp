@@ -41,13 +41,16 @@ void RenderScene::render_initGL()
   glLightfv( GL_LIGHT0, GL_POSITION, afPos );
 
   // set material properties from colors
-  glEnable(GL_TEXTURE_2D); // OpenGL Texturen aktivieren
-  glEnable( GL_COLOR_MATERIAL );
-  glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
-  glPolygonMode(GL_FRONT,GL_FILL); // fill the front side of the polygone
-  glPolygonMode(GL_BACK,GL_LINE); // and use wireframe for back side
-  glDisable(GL_CULL_FACE); // do not use culling
-  glEnable( GL_MULTISAMPLE_ARB ); // enable anti-aliasing
+  if(!m_bRendered)
+	  {
+		  glEnable(GL_TEXTURE_2D); // OpenGL Texturen aktivieren
+		  glEnable( GL_COLOR_MATERIAL );
+          glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+		  glPolygonMode(GL_FRONT,GL_LINE); // wireframe for the front side of the polygone
+		  glPolygonMode(GL_BACK,GL_LINE); //and for the back side
+		  glDisable(GL_CULL_FACE); // do not use culling
+		  glEnable( GL_MULTISAMPLE_ARB ); // enable anti-aliasing
+  }
 }
 
 void RenderScene::render_camera()
@@ -134,4 +137,10 @@ RenderScene::Refinement()
 
 	/* re-render scene */
 	render_scene();
+}
+
+void RenderScene::SwitchTexture()
+{
+	cRendererA.SwitchTexture();
+	//render_scene();
 }

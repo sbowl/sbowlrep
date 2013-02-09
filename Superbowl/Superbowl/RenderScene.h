@@ -25,6 +25,8 @@ public:
 
   void Refinement();
 
+  void SwitchTexture();
+
 protected:
   int   m_iWidth;
   int   m_iHeight;
