@@ -15,7 +15,9 @@ public:
   // set the size of the window
   void setWindowSize( int width, int height );
   // render the scene
+  void render_initGL_init();
   void render_initGL();
+  void render_camera_init();
   void render_camera();
   void render_scene();
   // rotate scene
@@ -42,7 +44,5 @@ protected:
   float  m_fRot;
   float  m_fTurnX;
   float  m_fTurnY;
-
-  bool m_bRendered;
 };
 #endif

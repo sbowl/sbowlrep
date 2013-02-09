@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+bool render_init = false;
+
 const float afBasicVertices[NO_BASIC_VERTICES * 3] =
 {
  -ONEOVERSQRT3*THREEOVERSQRT5 * 1.0f, -0.3333333333f * THREEOVERSQRT5, 0.3333333333f * THREEOVERSQRT5, 
@@ -25,6 +27,8 @@ int m_iNoFaces = NO_BASIC_FACES;
 int refinementLevelNew = 0;
 int refinementLevel = 0;
 int BallMod = 0;
+
+int fps_timer = 0;
 
 /* initialise everything with default settings */
 void initSettings(void) {

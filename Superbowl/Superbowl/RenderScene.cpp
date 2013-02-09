@@ -14,7 +14,6 @@ RenderScene::RenderScene()
   , m_fRot( 0.0f )
   , m_fTurnX ( 0.0f)
   , m_fTurnY (0.0f)
-  , m_bRendered (false)
 {}
 
 void
@@ -23,6 +22,32 @@ RenderScene::setWindowSize( int width, int height )
   m_iWidth = width;
   m_iHeight = height;
   glViewport( 0, 0, m_iWidth, m_iHeight );			// tells OpenGL the new size of the render area
+}
+
+void RenderScene::render_initGL_init()
+{
+  float afPos[] = { 0.0, 0.0, 1.0, 0.0 }; // light source at infinity
+  //-----------------------------------------------------------------
+  // init GL
+  //-----------------------------------------------------------------
+  glClearColor(0.0f,0.0f,0.8f,0.0f); // set background color to blue
+  glClearDepth(1.0f); // set depth buffer to far plane
+  glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT ); // actually clear the framebuffer
+  glEnable(GL_DEPTH_TEST); // enable depth test with the z-buffer
+  glShadeModel( GL_SMOOTH ); // use Gouraud shading
+  glEnable( GL_LIGHTING ); // enable light calculation
+  glEnable( GL_LIGHT0 ); // set light 0
+  glLightfv( GL_LIGHT0, GL_POSITION, afPos );
+  //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE); lichteffekte etc fuer textur
+
+	// set material properties from colors
+	//glEnable(GL_TEXTURE_2D); // OpenGL Texturen aktivieren
+	glEnable( GL_COLOR_MATERIAL );
+	glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+	glPolygonMode(GL_FRONT,GL_LINE); // wireframe for the front side of the polygone
+	glPolygonMode(GL_BACK,GL_LINE); //and for the back side
+	glDisable(GL_CULL_FACE); // do not use culling
+	glEnable( GL_MULTISAMPLE_ARB ); // enable anti-aliasing
 }
 
 void RenderScene::render_initGL()
@@ -40,33 +65,10 @@ void RenderScene::render_initGL()
   glEnable( GL_LIGHT0 ); // set light 0
   glLightfv( GL_LIGHT0, GL_POSITION, afPos );
   //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE); lichteffekte etc fuer textur
-
-  // set material properties from colors
-  if(!m_bRendered)
-	  {
-		  //glEnable(GL_TEXTURE_2D); // OpenGL Texturen aktivieren
-		  glEnable( GL_COLOR_MATERIAL );
-          glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
-		  glPolygonMode(GL_FRONT,GL_LINE); // wireframe for the front side of the polygone
-		  glPolygonMode(GL_BACK,GL_LINE); //and for the back side
-		  glDisable(GL_CULL_FACE); // do not use culling
-		  glEnable( GL_MULTISAMPLE_ARB ); // enable anti-aliasing
-  }
 }
 
-void RenderScene::render_camera()
+void RenderScene::render_camera_init()
 {
-  //-----------------------------------------------------------------
-  // render camera
-  //-----------------------------------------------------------------
-  // render camera
-  
-  if (m_bRendered) {
-	glMatrixMode(GL_PROJECTION);
-	glRotatef( m_fRot, m_fTurnX, m_fTurnY, 0.0f );
-	return;
-  }
-
   glMatrixMode(GL_PROJECTION);
 
   glLoadIdentity();
@@ -80,9 +82,15 @@ void RenderScene::render_camera()
   glFrustum((GLdouble)left,(GLdouble)right,(GLdouble)bottom,(GLdouble)top,(GLdouble)m_dNearDistance,(GLdouble)m_dFarDistance);
   // camera placed at (0 0 10) looking in -z direction
   glTranslatef( 0, 0, -10.0f );
-  m_bRendered = true;
+  render_init = true;
 
   glRotatef( m_fRot, m_fTurnX, m_fTurnY, 0.0f );
+}
+
+void RenderScene::render_camera()
+{
+	glMatrixMode(GL_PROJECTION);
+	glRotatef( m_fRot, m_fTurnX, m_fTurnY, 0.0f );
 }
 
 void RenderScene::render_scene()

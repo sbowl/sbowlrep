@@ -12,6 +12,7 @@
 #include "RenderScene.h"
 
 #include <iostream>
+#include <time.h>
 
 
 // define prototypes
@@ -41,6 +42,86 @@ void DebugDialog(wchar_t *title, int num1, int num2) {
 	MessageBox(HWND_DESKTOP, txt1, title, MB_OK);
 }
 
+/* Loop um alle 1/fps Sekunden irgendwas zu machen */
+#define FPS 25
+void nebenher_zeug(void) {
+	clock_t t = clock();
+    if (t - fps_timer < CLOCKS_PER_SEC / FPS) return;
+	fps_timer = t;
+
+	/* disable? */
+	//return;
+
+	/* Zeug machen.. */
+
+	/* X-rotation */
+	glMatrixMode(GL_PROJECTION);
+	glRotatef( 1.0f, 0.0f, 1.0f, 0.0f);
+
+#if 1
+	/* algo:
+	schwenkstrecke merken, halbieren, mittelpunkt bestimmen:
+	schwank started auf '0' (x^2) und geht bis mittelpunkt auf zb '1' (x^2) (je nach gewünschter agressivität),
+	und ab mittelpunkt wird negiert zu zb(fest) '-1' (x^2) und geht bis zum schwenk-endpunkt hoch auf '0' (x^2). */
+	/* Y-rotation */
+	static float vrot_goal = 0.0f, vrot_cur = 0.0f, vrot_speed = 0.0f, vrot_mid = 0.0f;
+	static bool vrot_inverse = false;
+	float vrot_cur_old = vrot_cur, vrot_speed_eff, vrot_cur_norm;
+	if (vrot_cur < vrot_goal) {
+		/* speed aus x^n algo bestimmen */
+#if 0
+		if (vrot_cur < vrot_mid) {
+			vrot_cur_norm = vrot_cur / vrot_mid;//normalise
+		} else {
+			vrot_cur_norm = (vrot_goal - vrot_cur) / vrot_mid;//normalise
+		}
+		vrot_cur_norm /= 2;
+		vrot_speed_eff = vrot_speed * (0.1f + vrot_cur_norm * vrot_cur_norm);//avoid 0 speed
+#endif
+#if 1
+		vrot_cur_norm = vrot_cur / vrot_mid - 1;//normalise
+		vrot_speed_eff = vrot_speed * (0.1f + 1 - vrot_cur_norm * vrot_cur_norm);//avoid 0 speed
+#endif
+
+		/* virtuelle positionierung */
+		vrot_cur += abs(vrot_speed_eff);
+		/* nicht über's Ziel hinausschießen */
+		if (vrot_cur > vrot_goal) vrot_cur = vrot_goal;
+	} else {
+		/* neues Ziel + speed setzen */
+		vrot_cur = 0.0f;
+
+		/* sub-algorithmus für zielpunkt */
+#if 0 /* normal: random ziel */
+		vrot_goal = 40.0f + (float)(rand() % 140);
+		vrot_speed = (1.0f + (float)(rand() % 50) / 50) * 2;
+		/* inverse richtung? */
+		if (vrot_inverse) vrot_speed = -vrot_speed;
+		vrot_inverse = !vrot_inverse;
+#endif
+#if 1 /* pendel */
+		if (!vrot_inverse) {
+			vrot_goal = 30 + (float)(rand() % 60);
+			vrot_speed = (1.0f + (float)(rand() % 50) / 50) * 2;
+		}
+		/* inverse richtung? */
+		if (vrot_inverse) vrot_speed = -vrot_speed;
+		vrot_inverse = !vrot_inverse;
+#endif
+
+		/* mittelpunkt bestimmen für x^n geschwindigkeitsalgorithmus */
+		vrot_mid = vrot_goal / 2;
+	}
+	/* rotieren */
+	glMatrixMode(GL_PROJECTION);
+	glRotatef(vrot_speed_eff, 1.0f, 0.0f, 0.0f);
+#endif
+
+	/* redraw */
+    cRenderer.rotNone();
+	glutPostRedisplay();
+}
+
 int main(int argc, char* argv[])
 {
   int win;
@@ -65,6 +146,8 @@ int main(int argc, char* argv[])
   std::cout << "press k to turn left" << std::endl;
   std::cout << "press l to turn right" << std::endl;
 
+  glutIdleFunc(nebenher_zeug);
+
   glutMainLoop();
   // never reached
   return 0;
@@ -73,8 +156,13 @@ int main(int argc, char* argv[])
 void displayCallback()
 {
   // render the scene
-  cRenderer.render_initGL();
-  cRenderer.render_camera();
+  if (!render_init) {
+	cRenderer.render_initGL_init();
+	cRenderer.render_camera_init();
+  } else {
+	cRenderer.render_initGL();
+	cRenderer.render_camera();
+  }
   cRenderer.render_scene();
   // flush the command stream
   glFlush();

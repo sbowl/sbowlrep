@@ -1,6 +1,8 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+extern bool render_init;
+
 // data for tetraeder
 #define NO_BASIC_VERTICES	4
 #define NO_BASIC_FACES		4
@@ -25,6 +27,8 @@ extern int m_iNoFaces;
 extern int refinementLevelNew;
 extern int refinementLevel;
 extern int BallMod;
+
+extern int fps_timer;
 
 extern void initSettings(void);
 
