@@ -131,17 +131,10 @@ RenderScene::rotNone (void)
 void
 RenderScene::Refinement()
 {
-	/* Beispiel: Verwende das Refinement() von dooda */
-	//cRendererA.Refinement();
-	/* oder doch das andere? */
 	cRendererB.Refinement();
-
-	/* re-render scene */
-	render_scene();
 }
 
 void RenderScene::SwitchTexture()
 {
 	cRendererA.SwitchTexture();
-	//render_scene();
 }

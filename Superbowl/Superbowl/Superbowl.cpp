@@ -141,6 +141,10 @@ void keyboardCallback( unsigned char key, int x, int y)
 	  cRenderer.SwitchTexture();
 	  glutPostRedisplay();				            // creates an event for redrawing (calls displayCallback() )
 	  break;
+
+	/* ball -> crunchy */
+  case 'm':
+	  BallMod = (BallMod + 1) % 2;
   }
 }
 

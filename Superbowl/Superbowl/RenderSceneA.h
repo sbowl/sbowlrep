@@ -11,8 +11,6 @@ public:
   // destructor
   ~RenderSceneA() {};
 
-  void Refinement();
-
   void Plane();
 
   void SwitchTexture();
