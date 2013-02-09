@@ -95,7 +95,10 @@ void RenderSceneA::Plane()
                  GL_UNSIGNED_BYTE,  // Datentyp der Komponenten (0 bis 255)
                  data);           // Pixel-Puffer
 
-	glDrawElements(GL_QUADS, 1, GL_UNSIGNED_INT);
+
+	//glVertexPointer( 3, GL_FLOAT, 0, afVertices );
+
+	//glDrawElements(GL_QUADS, 1, GL_UNSIGNED_INT);
 	glBegin(GL_QUADS);   
 		glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  0.0f);                  
 		glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);                 
