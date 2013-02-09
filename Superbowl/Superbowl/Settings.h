@@ -18,6 +18,7 @@ extern const unsigned int auiBasicIndices[NO_BASIC_FACES * 3];
 
 extern float *afVertices;
 extern int *auiIndices;
+extern float *auiTextureCoord;
 
 extern int m_iNoVertices;
 extern int m_iNoFaces;

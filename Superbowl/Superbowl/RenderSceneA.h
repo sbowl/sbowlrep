@@ -15,6 +15,12 @@ public:
 
   void SwitchTexture();
 
+  void CreateScene();
+
+  void UpdateTextureCoord(float *auiTextureCoord);
+
+  void CalculateTextureCoord();
+
 protected:
 	
 	int TextureMode; //1 = wire, 2 = fill, 3 = texture
