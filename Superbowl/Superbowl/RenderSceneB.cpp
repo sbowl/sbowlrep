@@ -126,9 +126,6 @@ void RenderSceneB::RefinementStep()
 			vy += DEBUG_VERTS_VAL;
 			vz += DEBUG_VERTS_VAL;
 #else
-			vx *= 2;
-			vy *= 2;
-			vz *= 2;
 			vlen = sqrtf(vx*vx + vy*vy + vz*vz);
 			vx = vx / vlen;
 			vy = vy / vlen;
@@ -160,9 +157,6 @@ void RenderSceneB::RefinementStep()
 			vy += DEBUG_VERTS_VAL;
 			vz += DEBUG_VERTS_VAL;
 #else
-			vx *= 2;
-			vy *= 2;
-			vz *= 2;
 			vlen = sqrtf(vx*vx + vy*vy + vz*vz);
 			vx = vx / vlen;
 			vy = vy / vlen;
@@ -194,9 +188,6 @@ void RenderSceneB::RefinementStep()
 			vy += DEBUG_VERTS_VAL;
 			vz += DEBUG_VERTS_VAL;
 #else
-			vx *= 2;
-			vy *= 2;
-			vz *= 2;
 			vlen = sqrtf(vx*vx + vy*vy + vz*vz);
 			vx = vx / vlen;
 			vy = vy / vlen;
@@ -209,6 +200,9 @@ void RenderSceneB::RefinementStep()
 
 			vertexInd++;
 		}
+
+		/* sollte optimieren: können hier continue; falls kein neuer knoten definiert wurde,
+		   und können teile folgender checks aussparen falls nicht alle 3 knoten neu definiert wurden */
 
 		/* über bisher unbekannte flächen iterieren und dort die vertices auch gleich eintragen,
 		falls angrenzend an dieselbe betroffene Kante */
