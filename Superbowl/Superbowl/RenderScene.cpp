@@ -39,11 +39,12 @@ void RenderScene::render_initGL()
   glEnable( GL_LIGHTING ); // enable light calculation
   glEnable( GL_LIGHT0 ); // set light 0
   glLightfv( GL_LIGHT0, GL_POSITION, afPos );
+  //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE); lichteffekte etc fuer textur
 
   // set material properties from colors
   if(!m_bRendered)
 	  {
-		  glEnable(GL_TEXTURE_2D); // OpenGL Texturen aktivieren
+		  //glEnable(GL_TEXTURE_2D); // OpenGL Texturen aktivieren
 		  glEnable( GL_COLOR_MATERIAL );
           glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
 		  glPolygonMode(GL_FRONT,GL_LINE); // wireframe for the front side of the polygone

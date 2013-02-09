@@ -107,6 +107,7 @@ void RenderSceneA::Plane()
                  GL_UNSIGNED_BYTE,  // Datentyp der Komponenten (0 bis 255)
                  data);           // Pixel-Puffer
 
+	glDrawElements(GL_QUADS, 1, GL_UNSIGNED_INT);
 	glBegin(GL_QUADS);   
 		glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  0.0f);                  
 		glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);                 
@@ -120,18 +121,21 @@ void RenderSceneA::SwitchTexture()
 {
 	if (TextureMode == 1)
 	{
+		glDisable(GL_TEXTURE_2D);
 		glPolygonMode(GL_FRONT,GL_FILL); // fill the front side of the polygone
 		glPolygonMode(GL_BACK,GL_FILL); // and use wireframe for back side
 		TextureMode = 2;
 	}
 	else if (TextureMode == 2)
 	{
+		glEnable(GL_TEXTURE_2D);
 		glPolygonMode(GL_FRONT,GL_FILL); // fill the front side of the polygone
 		glPolygonMode(GL_BACK,GL_FILL); // and use wireframe for back side
 		TextureMode = 3;
 	}
 	else 
 	{
+		glDisable(GL_TEXTURE_2D);
 		glPolygonMode(GL_FRONT,GL_LINE); // fill the front side of the polygone
 		glPolygonMode(GL_BACK,GL_LINE); // and use wireframe for back side
 		TextureMode = 1;
