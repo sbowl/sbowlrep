@@ -97,11 +97,34 @@ void RenderSceneA::CreateScene()
 	};
 	glMultMatrixf(multMatrix);
 	glDisableClientState( GL_TEXTURE_COORD_ARRAY );
+    //glDrawElements( GL_TRIANGLES, NO_FACES_SPHERE*3, GL_UNSIGNED_INT, auiIndicesSphere);                 
+    glEnd(); 
+}
+
+void RenderSceneA::RenderScene()
+{
+	//big sphere
+	glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glColor3f( 1.0f, 1.0f, 1.0f );
+    glVertexPointer( 3, GL_FLOAT, 0, afVertices ); // set pointer to vertex data
+    glNormalPointer( GL_FLOAT, 0, afVertices ); // set pointer to normal data
+    glEnableClientState( GL_VERTEX_ARRAY ); // enable vertex and normal pointer
+    glEnableClientState( GL_NORMAL_ARRAY );
+	float *auiTextureCoord = new float[2*m_iNoVertices];
+	UpdateTextureCoord(auiTextureCoord);
+	glTexCoordPointer(2, GL_FLOAT, 0, auiTextureCoord);
+	glEnableClientState( GL_TEXTURE_COORD_ARRAY );
+    glDrawElements( GL_TRIANGLES, m_iNoFaces*3, GL_UNSIGNED_INT, auiIndices );
+
+	//small sphere
+	//glVertexPointer( 3, GL_FLOAT, 0, afVerticesSphere );
+	//glDisableClientState( GL_TEXTURE_COORD_ARRAY );
     //glDrawElements( GL_TRIANGLES, NO_FACES_SPHERE*3, GL_UNSIGNED_INT, auiIndicesSphere);
 
-
-
+	return;
 	//Simple Plane by 4 Quads
+	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();                                  
     glColor3f(0.5f,0.5f,1.0f);                         
     glBegin(GL_QUADS);                         
@@ -130,30 +153,7 @@ void RenderSceneA::CreateScene()
 		//glTexCoord2f(1.0f, 1.0f); 
 		glVertex3f( 0.0f, -1.0f,  1.0f);                 
 		//glTexCoord2f(0.0f, 1.0f); 
-		glVertex3f( 0.0f, -1.0f,  0.0f);                  
-    glEnd(); 
-}
-
-void RenderSceneA::RenderScene()
-{
-	glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glColor3f( 1.0f, 1.0f, 1.0f );
-
-    glVertexPointer( 3, GL_FLOAT, 0, afVertices ); // set pointer to vertex data
-    glNormalPointer( GL_FLOAT, 0, afVertices ); // set pointer to normal data
-    glEnableClientState( GL_VERTEX_ARRAY ); // enable vertex and normal pointer
-    glEnableClientState( GL_NORMAL_ARRAY );
-	float *auiTextureCoord = new float[2*m_iNoVertices];
-	UpdateTextureCoord(auiTextureCoord);
-
-	glTexCoordPointer(2, GL_FLOAT, 0, auiTextureCoord);
-	glEnableClientState( GL_TEXTURE_COORD_ARRAY );
-    glDrawElements( GL_TRIANGLES, m_iNoFaces*3, GL_UNSIGNED_INT, auiIndices );
-
-	glVertexPointer( 3, GL_FLOAT, 0, afVerticesSphere );
-	glDisableClientState( GL_TEXTURE_COORD_ARRAY );
-    //glDrawElements( GL_TRIANGLES, NO_FACES_SPHERE*3, GL_UNSIGNED_INT, auiIndicesSphere);
+		glVertex3f( 0.0f, -1.0f,  0.0f); 
 }
 
 
