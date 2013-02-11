@@ -34,9 +34,14 @@ void RenderScene::render_initGL_init()
   glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT ); // actually clear the framebuffer
   glEnable(GL_DEPTH_TEST); // enable depth test with the z-buffer
   glShadeModel( GL_SMOOTH ); // use Gouraud shading
+#if 0
   glEnable( GL_LIGHTING ); // enable light calculation
   glEnable( GL_LIGHT0 ); // set light 0
   glLightfv( GL_LIGHT0, GL_POSITION, afPos );
+#else
+  GLfloat global_ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
+#endif
   //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE); lichteffekte etc fuer textur
 
 	// set material properties from colors

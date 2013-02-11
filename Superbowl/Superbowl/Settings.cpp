@@ -36,7 +36,7 @@ int refinementLevel = 0;
 int BallMod = 0;
 int CamMoveV = 0;
 int CamMoveH = 1;
-
+float LightMove = 0.0f;
 
 int fps_timer = 0;
 

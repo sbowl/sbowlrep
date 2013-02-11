@@ -72,6 +72,31 @@ void nebenher_zeug(void) {
 
 	/* Zeug machen.. */
 
+#if 1 /* zweite Lichtquelle bewegen */
+	//glEnable(GL_LIGHTING);
+//	GLfloat ambientLight[] = {0.1f, 0.1f, 0.1f, 0.0f};
+//	GLfloat diffuseLight[] = {2.0f, 0.0f, 0.0f, 1.0f};
+//	GLfloat specularLight[] = {0.0f, 2.0f, 0.0f, 1.0f};
+	//GLfloat position[] = {0.0f, 3.0f, 5.0f, 1.0f};
+	GLfloat position[4];// = {0.0f, 3.0f, 5.0f, 1.0f};
+	position[3] = 1.0f; //point lite (sun vs fireball bla)
+	position[1] = 1.0f; //y-coord ist fest
+	LightMove += 0.2f;
+	if (LightMove == 360) LightMove = 0;
+	position[0] = 5.0f * cos(LightMove);
+	position[2] = 5.0f * sin(LightMove);
+	GLfloat direction[3];// = {0.0f, 3.0f, 5.0f, 1.0f};
+	direction[0] = -position[0];
+	direction[1] = -position[1];
+	direction[2] = -position[2];
+	glLightfv(GL_LIGHT1, GL_POSITION, position);
+	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, direction);
+	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 70);
+	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 120.0f);
+	//glShadeModel(GL_SMOOTH);
+	//glEnable(GL_LIGHT1);
+#endif
+
 	//rotate little sphere
 	glVertexPointer( 3, GL_FLOAT, 0, afVerticesSphere );
 	glMatrixMode(GL_MODELVIEW);
