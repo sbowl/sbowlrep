@@ -1,0 +1,4 @@
+1. Jonas: Kamera drehen glRotatef bei MatrixMode(GL_Projection), c Drehung, C Schwenk/Pendel randomisiert und gebremst
+2. Timo: m Oberflächenverzerrung, l Lichtfarb-Änderung
+3. Verfeinerung/Vergröberung mit Algorithmus
+4. t Texture Switch, p Projection Switch mit Längengrad und nichtfunkt. Mercator etc, Riss an Karte
