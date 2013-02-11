@@ -241,6 +241,7 @@ void displayCallback()
 	cRenderer.render_initGL_init();
 	cRenderer.render_camera_init();
 	cRenderer.create_scene();
+	render_init = true;
   } else {
 	cRenderer.render_initGL();
 	cRenderer.render_camera();

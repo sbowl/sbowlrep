@@ -3,7 +3,7 @@
 
 RenderSceneA::RenderSceneA()
 {
-	TextureMode = 1;
+	TextureMode = 0;
 	intProjMode = 0;
 }
 
@@ -93,6 +93,8 @@ void RenderSceneA::CreateScene()
 void RenderSceneA::RenderScene()
 {
 	//big sphere
+	//glPolygonMode(GL_FRONT,GL_LINE);
+	//glPolygonMode(GL_BACK,GL_LINE);
 	glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glColor3f( 1.0f, 1.0f, 1.0f );

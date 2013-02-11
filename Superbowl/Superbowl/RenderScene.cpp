@@ -96,7 +96,6 @@ void RenderScene::render_camera_init()
   glFrustum((GLdouble)left,(GLdouble)right,(GLdouble)bottom,(GLdouble)top,(GLdouble)m_dNearDistance,(GLdouble)m_dFarDistance);
   // camera placed at (0 0 10) looking in -z direction
   glTranslatef( 0, 0, -10.0f );
-  render_init = true;
 
   glRotatef( m_fRot, m_fTurnX, m_fTurnY, 0.0f );
 }
