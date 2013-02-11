@@ -82,23 +82,12 @@ void RenderSceneA::CreateScene()
 
 
 	//rotating Sphere
-	memcpy(afVerticesSphere,afVerticesSphereStart, NO_VERTICES_SPHERE*3);
-	memcpy(auiIndicesSphere,auiIndicesSphereStart,NO_FACES_SPHERE*3);
-	glVertexPointer( 3, GL_FLOAT, 0, afVerticesSphere );
-	glMatrixMode(GL_MODELVIEW);
-	glTranslatef(2.0f,0.0f,0.0f);
-	float radiusSphere = 0.3f;
-	float multMatrix[16] =
-	{
-		radiusSphere,0.0f,0.0f,0.0f,
-		0.0f,radiusSphere,0.0f,0.0f,
-		0.0f,0.0f,radiusSphere,0.0f,
-		0.0f,0.0f,0.0f,1.0f
-	};
-	glMultMatrixf(multMatrix);
-	glDisableClientState( GL_TEXTURE_COORD_ARRAY );
-    //glDrawElements( GL_TRIANGLES, NO_FACES_SPHERE*3, GL_UNSIGNED_INT, auiIndicesSphere);                 
-    glEnd(); 
+	memcpy(afVerticesSphere,afVerticesSphereStart, sizeof(float) * NO_VERTICES_SPHERE*3);
+	memcpy(auiIndicesSphere,auiIndicesSphereStart,sizeof(int) * NO_FACES_SPHERE*3);
+	
+    //glDrawElements( GL_TRIANGLES, NO_FACES_SPHERE*3, GL_UNSIGNED_INT, auiIndicesSphere);     
+
+	
 }
 
 void RenderSceneA::RenderScene()
@@ -116,17 +105,35 @@ void RenderSceneA::RenderScene()
 	glTexCoordPointer(2, GL_FLOAT, 0, auiTextureCoord);
 	glEnableClientState( GL_TEXTURE_COORD_ARRAY );
     glDrawElements( GL_TRIANGLES, m_iNoFaces*3, GL_UNSIGNED_INT, auiIndices );
-
+	
 	//small sphere
-	//glVertexPointer( 3, GL_FLOAT, 0, afVerticesSphere );
-	//glDisableClientState( GL_TEXTURE_COORD_ARRAY );
-    //glDrawElements( GL_TRIANGLES, NO_FACES_SPHERE*3, GL_UNSIGNED_INT, auiIndicesSphere);
+	glPolygonMode(GL_FRONT,GL_FILL);
+	glPolygonMode(GL_BACK,GL_FILL);
+	glVertexPointer( 3, GL_FLOAT, 0, afVerticesSphere );
+	glMatrixMode(GL_MODELVIEW);
+	float RadiusSphere = 2.0f;
+	float vx = RadiusSphere * sin(SphereMove);
+	float vz = RadiusSphere * cos(SphereMove);
+	glTranslatef(vx,0.0f,vz);
+	float radiusSphere = 0.3f;
+	float multMatrix[16] =
+	{
+		radiusSphere,0.0f,0.0f,0.0f,
+		0.0f,radiusSphere,0.0f,0.0f,
+		0.0f,0.0f,radiusSphere,0.0f,
+		0.0f,0.0f,0.0f,1.0f
+	};
+	glMultMatrixf(multMatrix);
+	glDisableClientState( GL_TEXTURE_COORD_ARRAY );
+    glDrawElements( GL_TRIANGLES, NO_FACES_SPHERE*3, GL_UNSIGNED_INT, auiIndicesSphere);
 
-	return;
-	//Simple Plane by 4 Quads
+	 //Simple Plane by 4 Quads
+	glPolygonMode(GL_FRONT,GL_LINE); // wireframe for the front side of the polygone
+	glPolygonMode(GL_BACK,GL_LINE); //and for the back side
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();                                  
-    glColor3f(0.5f,0.5f,1.0f);                         
+    glColor3f(0.5f,0.5f,1.0f);  
+	glDisableClientState( GL_TEXTURE_COORD_ARRAY );
     glBegin(GL_QUADS);                         
         glVertex3f(-1.0f, -1.0f, -1.0f);                  
         glVertex3f( 0.0f, -1.0f, -1.0f);                 
@@ -153,7 +160,99 @@ void RenderSceneA::RenderScene()
 		//glTexCoord2f(1.0f, 1.0f); 
 		glVertex3f( 0.0f, -1.0f,  1.0f);                 
 		//glTexCoord2f(0.0f, 1.0f); 
-		glVertex3f( 0.0f, -1.0f,  0.0f); 
+		glVertex3f( 0.0f, -1.0f,  0.0f);             
+    glEnd();
+    glBegin(GL_QUADS);                         
+        glVertex3f(-1.0f, -1.0f, -1.0f);                  
+        glVertex3f( 0.0f, -1.0f, -1.0f);                 
+        glVertex3f( 0.0f, -1.0f, 0.0f);                 
+        glVertex3f(-1.0f, -1.0f, 0.0f);                  
+    glEnd(); 
+    glBegin(GL_QUADS);                         
+        glVertex3f(-1.0f, -1.0f, -1.0f);                  
+        glVertex3f( 0.0f, -1.0f, -1.0f);                 
+        glVertex3f( 0.0f, -1.0f, 0.0f);                 
+        glVertex3f(-1.0f, -1.0f, 0.0f);                  
+    glEnd(); 
+    glBegin(GL_QUADS);                         
+        glVertex3f(-1.0f, -1.0f, -1.0f);                  
+        glVertex3f( 0.0f, -1.0f, -1.0f);                 
+        glVertex3f( 0.0f, -1.0f, 0.0f);                 
+        glVertex3f(-1.0f, -1.0f, 0.0f);                  
+    glEnd(); 
+    glBegin(GL_QUADS);                         
+        glVertex3f(-1.0f, -1.0f, -1.0f);                  
+        glVertex3f( 0.0f, -1.0f, -1.0f);                 
+        glVertex3f( 0.0f, -1.0f, 0.0f);                 
+        glVertex3f(-1.0f, -1.0f, 0.0f);                  
+    glEnd(); 
+    glBegin(GL_QUADS);                         
+        glVertex3f(-1.0f, -1.0f, -1.0f);                  
+        glVertex3f( 0.0f, -1.0f, -1.0f);                 
+        glVertex3f( 0.0f, -1.0f, 0.0f);                 
+        glVertex3f(-1.0f, -1.0f, 0.0f);                  
+    glEnd(); 
+    glBegin(GL_QUADS);                         
+        glVertex3f(-1.0f, -1.0f, -1.0f);                  
+        glVertex3f( 0.0f, -1.0f, -1.0f);                 
+        glVertex3f( 0.0f, -1.0f, 0.0f);                 
+        glVertex3f(-1.0f, -1.0f, 0.0f);                  
+    glEnd(); 
+    glBegin(GL_QUADS);                         
+        glVertex3f(-1.0f, -1.0f, -1.0f);                  
+        glVertex3f( 0.0f, -1.0f, -1.0f);                 
+        glVertex3f( 0.0f, -1.0f, 0.0f);                 
+        glVertex3f(-1.0f, -1.0f, 0.0f);                  
+    glEnd(); 
+    glBegin(GL_QUADS);                         
+        glVertex3f(-1.0f, -1.0f, -1.0f);                  
+        glVertex3f( 0.0f, -1.0f, -1.0f);                 
+        glVertex3f( 0.0f, -1.0f, 0.0f);                 
+        glVertex3f(-1.0f, -1.0f, 0.0f);                  
+    glEnd(); 
+    glBegin(GL_QUADS);                         
+        glVertex3f(-1.0f, -1.0f, -1.0f);                  
+        glVertex3f( 0.0f, -1.0f, -1.0f);                 
+        glVertex3f( 0.0f, -1.0f, 0.0f);                 
+        glVertex3f(-1.0f, -1.0f, 0.0f);                  
+    glEnd(); 
+    glBegin(GL_QUADS);                         
+        glVertex3f(-1.0f, -1.0f, -1.0f);                  
+        glVertex3f( 0.0f, -1.0f, -1.0f);                 
+        glVertex3f( 0.0f, -1.0f, 0.0f);                 
+        glVertex3f(-1.0f, -1.0f, 0.0f);                  
+    glEnd(); 
+    glBegin(GL_QUADS);                         
+        glVertex3f(-1.0f, -1.0f, -1.0f);                  
+        glVertex3f( 0.0f, -1.0f, -1.0f);                 
+        glVertex3f( 0.0f, -1.0f, 0.0f);                 
+        glVertex3f(-1.0f, -1.0f, 0.0f);                  
+    glEnd(); 
+    glBegin(GL_QUADS);                         
+        glVertex3f(-1.0f, -1.0f, -1.0f);                  
+        glVertex3f( 0.0f, -1.0f, -1.0f);                 
+        glVertex3f( 0.0f, -1.0f, 0.0f);                 
+        glVertex3f(-1.0f, -1.0f, 0.0f);                  
+    glEnd(); 
+	//go back to the previous Texture Mode stored in TextureMode
+	if (TextureMode == 1)
+	{
+		glDisable(GL_TEXTURE_2D);
+		glPolygonMode(GL_FRONT,GL_FILL); // fill the front side of the polygone
+		glPolygonMode(GL_BACK,GL_FILL); // and use wireframe for back side
+	}
+	else if (TextureMode == 2)
+	{
+		glEnable(GL_TEXTURE_2D);
+		glPolygonMode(GL_FRONT,GL_FILL); // fill the front side of the polygone
+		glPolygonMode(GL_BACK,GL_FILL); // and use wireframe for back side
+	}
+	else 
+	{
+		glDisable(GL_TEXTURE_2D);
+		glPolygonMode(GL_FRONT,GL_LINE); // fill the front side of the polygone
+		glPolygonMode(GL_BACK,GL_LINE); // and use wireframe for back side
+	}
 }
 
 

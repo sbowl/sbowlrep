@@ -38,6 +38,7 @@ int CamMoveV = 0;
 int CamMoveH = 1;
 float LightMove = 0.0f;
 int LightMod = 1, LightModCtrl = 1, LightModCol = 0;
+float SphereMove = 0.0f;
 
 int fps_timer = 0;
 

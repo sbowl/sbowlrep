@@ -71,6 +71,8 @@ void nebenher_zeug(void) {
 	//return;
 
 	/* Zeug machen.. */
+	SphereMove += 0.01f;
+	if (SphereMove == 360.0f) SphereMove = 0.0f;
 
 #if 1 /* zweite Lichtquelle bewegen */
 	switch (LightMod) {
@@ -243,7 +245,7 @@ void displayCallback()
 	cRenderer.render_initGL();
 	cRenderer.render_camera();
   }
-  cRenderer.render_scene();
+  cRenderer.render_scene();//uncomment
   // flush the command stream
   glFlush();
   // causes double buffered windows to show rendered content

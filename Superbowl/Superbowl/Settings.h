@@ -48,6 +48,7 @@ extern int CamMoveV;
 extern int CamMoveH;
 extern float LightMove;
 extern int LightMod, LightModCtrl, LightModCol;
+extern float SphereMove;
 
 extern int fps_timer;
 
