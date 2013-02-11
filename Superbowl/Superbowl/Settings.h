@@ -32,6 +32,15 @@ extern float *auiTextureCoord;
 extern int m_iNoVertices;
 extern int m_iNoFaces;
 
+
+#define NO_VERTICES_SPHERE 130
+#define NO_FACES_SPHERE 256
+extern const float afVerticesSphereStart[NO_VERTICES_SPHERE*3];
+extern const unsigned int auiIndicesSphereStart[NO_FACES_SPHERE*3];
+extern float *afVerticesSphere;
+extern unsigned int *auiIndicesSphere;
+
+
 extern int refinementLevelNew;
 extern int refinementLevel;
 extern int BallMod;

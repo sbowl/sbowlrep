@@ -104,11 +104,14 @@ void RenderScene::render_camera()
 void RenderScene::render_scene()
 {
   //-----------------------------------------------------------------
-  // render scene
+  // create scene
   //-----------------------------------------------------------------
-  
-  cRendererA.CreateScene();
+  cRendererA.RenderScene();
+}
 
+void RenderScene::create_scene()
+{
+	cRendererA.CreateScene();
 }
 
 void 

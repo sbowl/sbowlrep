@@ -15,6 +15,14 @@ void RenderSceneB::Refinement()
 		RefinementStep();
 	while (refinementLevelNew < refinementLevel)
 		DefinementStep();
+
+	/*FILE * file = fopen("Flaechen.log","w");//TODO ENTFERNEN DEBUG
+	for(int i = 0; i < m_iNoFaces; i=i+1)
+	{
+		fprintf(file,"%d, %d, %d, \n", auiIndices[3*i],auiIndices[3*i+1],auiIndices[3*i+2]);//TODO ENTFERNEN DEBUG
+	}
+	fprintf(file, "Knoten: %d, Flaechen: %d", m_iNoVertices, m_iNoFaces);
+	fclose(file);//TODO ENTFERNEN DEBUG*/
 }
 
 void RenderSceneB::RefinementStep()

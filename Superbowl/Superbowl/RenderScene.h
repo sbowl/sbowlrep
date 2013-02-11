@@ -20,6 +20,7 @@ public:
   void render_camera_init();
   void render_camera();
   void render_scene();
+  void create_scene();
   // rotate scene
   void rotY( float fAngle ) ;
   void rotX ( float fAngle ) ;

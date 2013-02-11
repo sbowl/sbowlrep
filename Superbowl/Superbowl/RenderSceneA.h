@@ -17,6 +17,7 @@ public:
   void SwitchProjection();
 
   void CreateScene();
+  void RenderScene();
 
   void UpdateTextureCoord(float *auiTextureCoord);
 

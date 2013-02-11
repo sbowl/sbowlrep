@@ -81,6 +81,27 @@ void RenderSceneA::CreateScene()
     glDrawElements( GL_TRIANGLES, m_iNoFaces*3, GL_UNSIGNED_INT, auiIndices ); // draw polygons
 
 
+	//rotating Sphere
+	float *afVerticesSphere = new float[NO_VERTICES_SPHERE * 3];
+	int *auiIndicesSphere = new int[NO_FACES_SPHERE * 3];
+	memcpy(afVerticesSphere,afVerticesSphereStart, NO_VERTICES_SPHERE * 3);
+	memcpy(auiIndicesSphere,auiIndicesSphereStart,NO_FACES_SPHERE*3);
+	glVertexPointer( 3, GL_FLOAT, 0, afVerticesSphere );
+	glMatrixMode(GL_MODELVIEW);
+	glTranslatef(2.0f,0.0f,0.0f);
+	float radiusSphere = 0.3f;
+	float multMatrix[16] =
+	{
+		radiusSphere,0.0f,0.0f,0.0f,
+		0.0f,radiusSphere,0.0f,0.0f,
+		0.0f,0.0f,radiusSphere,0.0f,
+		0.0f,0.0f,0.0f,1.0f
+	};
+	glMultMatrixf(multMatrix);
+	glDisableClientState( GL_TEXTURE_COORD_ARRAY );
+    glDrawElements( GL_TRIANGLES, NO_FACES_SPHERE*3, GL_UNSIGNED_INT, auiIndicesSphere);
+
+
 
 	//Simple Plane by 4 Quads
 	glLoadIdentity();                                  
@@ -113,6 +134,13 @@ void RenderSceneA::CreateScene()
 		//glTexCoord2f(0.0f, 1.0f); 
 		glVertex3f( 0.0f, -1.0f,  0.0f);                  
     glEnd(); 
+}
+
+void RenderSceneA::RenderScene()
+{
+	glVertexPointer( 3, GL_FLOAT, 0, afVerticesSphere );
+	glDisableClientState( GL_TEXTURE_COORD_ARRAY );
+    glDrawElements( GL_TRIANGLES, NO_FACES_SPHERE*3, GL_UNSIGNED_INT, auiIndicesSphere);
 }
 
 

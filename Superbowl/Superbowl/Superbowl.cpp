@@ -72,9 +72,16 @@ void nebenher_zeug(void) {
 
 	/* Zeug machen.. */
 
+	//rotate little sphere
+	glVertexPointer( 3, GL_FLOAT, 0, afVerticesSphere );
+	glMatrixMode(GL_MODELVIEW);
+	glRotatef(1.0f,0.0f,1.0f,0.0f);
+
+
 	/* X-rotation */
 	glMatrixMode(GL_PROJECTION);
 	glRotatef( 1.0f, 0.0f, 1.0f, 0.0f);
+
 
 #if 1
 	/* algo:
@@ -177,6 +184,7 @@ void displayCallback()
   if (!render_init) {
 	cRenderer.render_initGL_init();
 	cRenderer.render_camera_init();
+	cRenderer.create_scene();
   } else {
 	cRenderer.render_initGL();
 	cRenderer.render_camera();
@@ -254,7 +262,7 @@ void keyboardCallback( unsigned char key, int x, int y)
 	  if (BallMod == 0) memcpy(afVertices, afVertices_org, sizeof(float) * m_iNoVertices * 3);
 	  else memcpy(afVertices, afVertices_mod, sizeof(float) * m_iNoVertices * 3);
 	  break;
-
+	  
 	//change mode of projection
   case 'p':
 	  cRenderer.SwitchProjection();
