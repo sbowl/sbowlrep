@@ -134,106 +134,20 @@ void RenderSceneA::RenderScene()
 	glLoadIdentity();                                  
     glColor3f(0.5f,0.5f,1.0f);  
 	glDisableClientState( GL_TEXTURE_COORD_ARRAY );
-    glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f, -1.0f);                  
-        glVertex3f( 0.0f, -1.0f, -1.0f);                 
-        glVertex3f( 0.0f, -1.0f, 0.0f);                 
-        glVertex3f(-1.0f, -1.0f, 0.0f);                  
-    glEnd();  
-	glBegin(GL_QUADS);                         
-        glVertex3f( 0.0f, -1.0f, -1.0f);                  
-        glVertex3f( 1.0f, -1.0f, -1.0f);                 
-        glVertex3f( 1.0f, -1.0f,  0.0f);                 
-        glVertex3f( 0.0f, -1.0f,  0.0f);                  
-    glEnd(); 
-	glBegin(GL_QUADS);                         
-        glVertex3f( 0.0f, -1.0f,  0.0f);                  
-        glVertex3f( 1.0f, -1.0f,  0.0f);                 
-        glVertex3f( 1.0f, -1.0f,  1.0f);                 
-        glVertex3f( 0.0f, -1.0f,  1.0f);                  
-    glEnd();
-	glBegin(GL_QUADS);   
-		//glTexCoord2f(0.0f, 0.0f); //if you wanted to add texture coordinates to the following vertex
-		glVertex3f(-1.0f, -1.0f,  0.0f);                  
-		//glTexCoord2f(1.0f, 0.0f); 
-		glVertex3f(-1.0f, -1.0f,  1.0f);                 
-		//glTexCoord2f(1.0f, 1.0f); 
-		glVertex3f( 0.0f, -1.0f,  1.0f);                 
-		//glTexCoord2f(0.0f, 1.0f); 
-		glVertex3f( 0.0f, -1.0f,  0.0f);             
-    glEnd();
-    glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f, -1.0f);                  
-        glVertex3f( 0.0f, -1.0f, -1.0f);                 
-        glVertex3f( 0.0f, -1.0f, 0.0f);                 
-        glVertex3f(-1.0f, -1.0f, 0.0f);                  
-    glEnd(); 
-    glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f, -1.0f);                  
-        glVertex3f( 0.0f, -1.0f, -1.0f);                 
-        glVertex3f( 0.0f, -1.0f, 0.0f);                 
-        glVertex3f(-1.0f, -1.0f, 0.0f);                  
-    glEnd(); 
-    glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f, -1.0f);                  
-        glVertex3f( 0.0f, -1.0f, -1.0f);                 
-        glVertex3f( 0.0f, -1.0f, 0.0f);                 
-        glVertex3f(-1.0f, -1.0f, 0.0f);                  
-    glEnd(); 
-    glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f, -1.0f);                  
-        glVertex3f( 0.0f, -1.0f, -1.0f);                 
-        glVertex3f( 0.0f, -1.0f, 0.0f);                 
-        glVertex3f(-1.0f, -1.0f, 0.0f);                  
-    glEnd(); 
-    glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f, -1.0f);                  
-        glVertex3f( 0.0f, -1.0f, -1.0f);                 
-        glVertex3f( 0.0f, -1.0f, 0.0f);                 
-        glVertex3f(-1.0f, -1.0f, 0.0f);                  
-    glEnd(); 
-    glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f, -1.0f);                  
-        glVertex3f( 0.0f, -1.0f, -1.0f);                 
-        glVertex3f( 0.0f, -1.0f, 0.0f);                 
-        glVertex3f(-1.0f, -1.0f, 0.0f);                  
-    glEnd(); 
-    glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f, -1.0f);                  
-        glVertex3f( 0.0f, -1.0f, -1.0f);                 
-        glVertex3f( 0.0f, -1.0f, 0.0f);                 
-        glVertex3f(-1.0f, -1.0f, 0.0f);                  
-    glEnd(); 
-    glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f, -1.0f);                  
-        glVertex3f( 0.0f, -1.0f, -1.0f);                 
-        glVertex3f( 0.0f, -1.0f, 0.0f);                 
-        glVertex3f(-1.0f, -1.0f, 0.0f);                  
-    glEnd(); 
-    glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f, -1.0f);                  
-        glVertex3f( 0.0f, -1.0f, -1.0f);                 
-        glVertex3f( 0.0f, -1.0f, 0.0f);                 
-        glVertex3f(-1.0f, -1.0f, 0.0f);                  
-    glEnd(); 
-    glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f, -1.0f);                  
-        glVertex3f( 0.0f, -1.0f, -1.0f);                 
-        glVertex3f( 0.0f, -1.0f, 0.0f);                 
-        glVertex3f(-1.0f, -1.0f, 0.0f);                  
-    glEnd(); 
-    glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f, -1.0f);                  
-        glVertex3f( 0.0f, -1.0f, -1.0f);                 
-        glVertex3f( 0.0f, -1.0f, 0.0f);                 
-        glVertex3f(-1.0f, -1.0f, 0.0f);                  
-    glEnd(); 
-    glBegin(GL_QUADS);                         
-        glVertex3f(-1.0f, -1.0f, -1.0f);                  
-        glVertex3f( 0.0f, -1.0f, -1.0f);                 
-        glVertex3f( 0.0f, -1.0f, 0.0f);                 
-        glVertex3f(-1.0f, -1.0f, 0.0f);                  
-    glEnd(); 
+
+	/* quads generieren [4x4] */
+	int qx,qy;
+	for (qx = -2; qx < 2; qx++) {
+		for (qy = -2; qy < 2; qy++) {
+			glBegin(GL_QUADS);                         
+				glVertex3f(1.0f * qx, -1.0f, 1.0f * qy);
+				glVertex3f(1.0f * (qx + 1), -1.0f, 1.0f * qy);
+				glVertex3f(1.0f * (qx + 1), -1.0f, 1.0f * (qy + 1));
+				glVertex3f(1.0f * qx, -1.0f, 1.0f * (qy + 1));
+			glEnd();
+		}
+	}
+
 	//go back to the previous Texture Mode stored in TextureMode
 	if (TextureMode == 1)
 	{

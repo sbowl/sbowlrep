@@ -39,7 +39,7 @@ void RenderScene::render_initGL_init()
   glEnable( GL_LIGHT0 ); // set light 0
   glLightfv( GL_LIGHT0, GL_POSITION, afPos );
 #else
-  GLfloat global_ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+  GLfloat global_ambient[] = { 0.5f, 0.5f, 0.5f, 1.0f };
   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
 #endif
   //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE); lichteffekte etc fuer textur
