@@ -43,7 +43,10 @@ extern unsigned int *auiIndicesSphere;
 
 extern int refinementLevelNew;
 extern int refinementLevel;
+
 extern int BallMod;
+extern int CamMoveV;
+extern int CamMoveH;
 
 extern int fps_timer;
 

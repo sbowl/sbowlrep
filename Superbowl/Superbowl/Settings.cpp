@@ -32,7 +32,10 @@ int m_iNoFaces = NO_BASIC_FACES;
 
 int refinementLevelNew = 0;
 int refinementLevel = 0;
+
 int BallMod = 0;
+int CamMoveV = 0;
+int CamMoveH = 1;
 
 
 int fps_timer = 0;

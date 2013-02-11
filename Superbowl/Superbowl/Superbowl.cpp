@@ -77,70 +77,71 @@ void nebenher_zeug(void) {
 	glMatrixMode(GL_MODELVIEW);
 	glRotatef(1.0f,0.0f,1.0f,0.0f);
 
-
-	/* X-rotation */
-	glMatrixMode(GL_PROJECTION);
-	glRotatef( 1.0f, 0.0f, 1.0f, 0.0f);
-
-
-#if 1
-	/* algo:
-	schwenkstrecke merken, halbieren, mittelpunkt bestimmen:
-	schwank started auf '0' (x^2) und geht bis mittelpunkt auf zb '1' (x^2) (je nach gewünschter agressivität),
-	und ab mittelpunkt wird negiert zu zb(fest) '-1' (x^2) und geht bis zum schwenk-endpunkt hoch auf '0' (x^2). */
-	/* Y-rotation */
-	static float vrot_goal = 0.0f, vrot_cur = 0.0f, vrot_speed = 0.0f, vrot_mid = 0.0f;
-	static bool vrot_inverse = false;
-	float vrot_cur_old = vrot_cur, vrot_speed_eff, vrot_cur_norm;
-	if (vrot_cur < vrot_goal) {
-		/* speed aus x^n algo bestimmen */
-#if 0
-		if (vrot_cur < vrot_mid) {
-			vrot_cur_norm = vrot_cur / vrot_mid;//normalise
-		} else {
-			vrot_cur_norm = (vrot_goal - vrot_cur) / vrot_mid;//normalise
-		}
-		vrot_cur_norm /= 2;
-		vrot_speed_eff = vrot_speed * (0.1f + vrot_cur_norm * vrot_cur_norm);//avoid 0 speed
-#endif
-#if 1
-		vrot_cur_norm = vrot_cur / vrot_mid - 1;//normalise
-		vrot_speed_eff = vrot_speed * (0.1f + 1 - vrot_cur_norm * vrot_cur_norm);//avoid 0 speed
-#endif
-
-		/* virtuelle positionierung */
-		vrot_cur += abs(vrot_speed_eff);
-		/* nicht über's Ziel hinausschießen */
-		if (vrot_cur > vrot_goal) vrot_cur = vrot_goal;
-	} else {
-		/* neues Ziel + speed setzen */
-		vrot_cur = 0.0f;
-
-		/* sub-algorithmus für zielpunkt */
-#if 0 /* normal: random ziel */
-		vrot_goal = 40.0f + (float)(rand() % 140);
-		vrot_speed = (1.0f + (float)(rand() % 50) / 50) * 2;
-		/* inverse richtung? */
-		if (vrot_inverse) vrot_speed = -vrot_speed;
-		vrot_inverse = !vrot_inverse;
-#endif
-#if 1 /* pendel */
-		if (!vrot_inverse) {
-			vrot_goal = 50 + (float)(rand() % 50);
-			vrot_speed = (1.0f + (float)(rand() % 50) / 50) * 2;
-		}
-		/* inverse richtung? */
-		if (vrot_inverse) vrot_speed = -vrot_speed;
-		vrot_inverse = !vrot_inverse;
-#endif
-
-		/* mittelpunkt bestimmen für x^n geschwindigkeitsalgorithmus */
-		vrot_mid = vrot_goal / 2;
+	if (CamMoveH) {
+		/* X-rotation */
+		glMatrixMode(GL_PROJECTION);
+		glRotatef( 0.8f, 0.0f, 0.8f, 0.0f);
 	}
-	/* rotieren */
-	glMatrixMode(GL_PROJECTION);
-	glRotatef(vrot_speed_eff, 1.0f, 0.0f, 0.0f);
+
+	if (CamMoveV) {
+		/* algo:
+		schwenkstrecke merken, halbieren, mittelpunkt bestimmen:
+		schwank started auf '0' (x^2) und geht bis mittelpunkt auf zb '1' (x^2) (je nach gewünschter agressivität),
+		und ab mittelpunkt wird negiert zu zb(fest) '-1' (x^2) und geht bis zum schwenk-endpunkt hoch auf '0' (x^2). */
+		/* Y-rotation */
+		static float vrot_goal = 0.0f, vrot_cur = 0.0f, vrot_speed = 0.0f, vrot_mid = 0.0f;
+		static bool vrot_inverse = false;
+		float vrot_cur_old = vrot_cur, vrot_speed_eff, vrot_cur_norm;
+
+		if (vrot_cur < vrot_goal) {
+			/* speed aus x^n algo bestimmen */
+#if 0
+			if (vrot_cur < vrot_mid) {
+				vrot_cur_norm = vrot_cur / vrot_mid;//normalise
+			} else {
+				vrot_cur_norm = (vrot_goal - vrot_cur) / vrot_mid;//normalise
+			}
+			vrot_cur_norm /= 2;
+			vrot_speed_eff = vrot_speed * (0.1f + vrot_cur_norm * vrot_cur_norm);//avoid 0 speed
 #endif
+#if 1
+			vrot_cur_norm = vrot_cur / vrot_mid - 1;//normalise
+			vrot_speed_eff = vrot_speed * (0.1f + 1 - vrot_cur_norm * vrot_cur_norm);//avoid 0 speed
+#endif
+
+			/* virtuelle positionierung */
+			vrot_cur += abs(vrot_speed_eff);
+			/* nicht über's Ziel hinausschießen */
+			if (vrot_cur > vrot_goal) vrot_cur = vrot_goal;
+		} else {
+			/* neues Ziel + speed setzen */
+			vrot_cur = 0.0f;
+
+			/* sub-algorithmus für zielpunkt */
+			if (CamMoveV == 2) { /* normal: random ziel */
+				vrot_goal = 40.0f + (float)(rand() % 140);
+				vrot_speed = (1.0f + (float)(rand() % 50) / 50) * 2;
+				/* inverse richtung? */
+				if (vrot_inverse) vrot_speed = -vrot_speed;
+				vrot_inverse = !vrot_inverse;
+			} else if (CamMoveV == 1) { /* pendel */
+				if (!vrot_inverse) {
+					vrot_goal = 50 + (float)(rand() % 50);
+					vrot_speed = (1.0f + (float)(rand() % 50) / 50) * 2;
+				}
+				/* inverse richtung? */
+				if (vrot_inverse) vrot_speed = -vrot_speed;
+				vrot_inverse = !vrot_inverse;
+			}
+
+			/* mittelpunkt bestimmen für x^n geschwindigkeitsalgorithmus */
+			vrot_mid = vrot_goal / 2;
+		}
+
+		/* rotieren */
+		glMatrixMode(GL_PROJECTION);
+		glRotatef(vrot_speed_eff, 1.0f, 0.0f, 0.0f);
+	}
 
 	/* redraw */
     cRenderer.rotNone();
@@ -267,6 +268,14 @@ void keyboardCallback( unsigned char key, int x, int y)
   case 'p':
 	  cRenderer.SwitchProjection();
 	  glutPostRedisplay();
+	  break;
+
+  case 'c':
+	  CamMoveH = (CamMoveH + 1) % 2;
+	  break;
+
+  case 'C':
+	  CamMoveV = (CamMoveV + 1) % 3;
 	  break;
   }
 }
