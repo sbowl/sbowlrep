@@ -73,28 +73,56 @@ void nebenher_zeug(void) {
 	/* Zeug machen.. */
 
 #if 1 /* zweite Lichtquelle bewegen */
-	//glEnable(GL_LIGHTING);
-//	GLfloat ambientLight[] = {0.1f, 0.1f, 0.1f, 0.0f};
-//	GLfloat diffuseLight[] = {2.0f, 0.0f, 0.0f, 1.0f};
-//	GLfloat specularLight[] = {0.0f, 2.0f, 0.0f, 1.0f};
-	//GLfloat position[] = {0.0f, 3.0f, 5.0f, 1.0f};
-	GLfloat position[4];// = {0.0f, 3.0f, 5.0f, 1.0f};
-	position[3] = 1.0f; //point lite (sun vs fireball bla)
-	position[1] = 1.0f; //y-coord ist fest
-	LightMove += 0.2f;
-	if (LightMove == 360) LightMove = 0;
-	position[0] = 5.0f * cos(LightMove);
-	position[2] = 5.0f * sin(LightMove);
-	GLfloat direction[3];// = {0.0f, 3.0f, 5.0f, 1.0f};
-	direction[0] = -position[0];
-	direction[1] = -position[1];
-	direction[2] = -position[2];
-	glLightfv(GL_LIGHT1, GL_POSITION, position);
-	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, direction);
-	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 70);
-	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 120.0f);
-	//glShadeModel(GL_SMOOTH);
-	//glEnable(GL_LIGHT1);
+	switch (LightMod) {
+	case 0:
+		if (LightModCtrl) {
+			LightModCtrl = 0;
+			glDisable(GL_LIGHT1);
+		}
+		break;
+	case 1:
+	case 2:
+		if (!LightModCtrl) {
+			LightModCtrl = 1;
+			glEnable(GL_LIGHT1);
+		}
+		GLfloat position[4];// = {0.0f, 3.0f, 5.0f, 1.0f};
+		position[3] = 1.0f; //point lite (sun vs fireball bla)
+		position[1] = 1.0f; //y-coord ist fest
+		LightMove += 0.2f;
+		if (LightMove == 360) LightMove = 0;
+		position[0] = 5.0f * cos(LightMove);
+		position[2] = 5.0f * sin(LightMove);
+		GLfloat direction[3];// = {0.0f, 3.0f, 5.0f, 1.0f};
+		direction[0] = -position[0];
+		direction[1] = -position[1];
+		direction[2] = -position[2];
+		glLightfv(GL_LIGHT1, GL_POSITION, position);
+		glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, direction);
+		glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 70);
+		glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 120.0f);
+
+		if (LightMod == 2) {
+				LightModCol = (LightModCol + 3) % 360;
+				GLfloat diffuseLight[4];// = {1.0f, 0.0f, 0.0f, 1.0f};
+				diffuseLight[3] = 1.0f;
+				if (LightModCol  < 120) {
+					diffuseLight[0] = 1.0f - LightModCol  / 120.0f;
+					diffuseLight[1] = LightModCol  / 120.0f;
+					diffuseLight[2] = 0.0f;
+				} else if (LightModCol  < 240) {
+					diffuseLight[0] = 0.0f;
+					diffuseLight[1] = 1.0f - (LightModCol  - 120.0f) / 120.0f;
+					diffuseLight[2] = (LightModCol  - 120.0f) / 120.0f;
+				} else {
+					diffuseLight[0] = (LightModCol  - 240.0f) / 120.0f;
+					diffuseLight[1] = 0.0f;
+					diffuseLight[2] = 1.0f - (LightModCol  - 240.0f) / 120.0f;
+				}
+				glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight);
+		}
+		break;
+	}
 #endif
 
 	//rotate little sphere
@@ -301,6 +329,9 @@ void keyboardCallback( unsigned char key, int x, int y)
 
   case 'C':
 	  CamMoveV = (CamMoveV + 1) % 3;
+	  break;
+  case 'l':
+	  LightMod = (LightMod + 1) % 3;
 	  break;
   }
 }

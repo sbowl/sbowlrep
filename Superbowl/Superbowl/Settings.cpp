@@ -37,6 +37,7 @@ int BallMod = 0;
 int CamMoveV = 0;
 int CamMoveH = 1;
 float LightMove = 0.0f;
+int LightMod = 1, LightModCtrl = 1, LightModCol = 0;
 
 int fps_timer = 0;
 

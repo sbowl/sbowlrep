@@ -56,8 +56,8 @@ void RenderScene::render_initGL_init()
 	
 #if 1 /* zweite Lichtquelle */
 	GLfloat ambientLight[] = {0.1f, 0.1f, 0.1f, 0.0f};
-	GLfloat diffuseLight[] = {2.0f, 0.0f, 0.0f, 1.0f};
-	GLfloat specularLight[] = {0.0f, 2.0f, 0.0f, 1.0f};
+	GLfloat diffuseLight[] = {1.0f, 0.0f, 0.0f, 1.0f};
+	GLfloat specularLight[] = {0.0f, 1.0f, 0.0f, 1.0f};
 	GLfloat position[] = {0.0f, 3.0f, 5.0f, 1.0f};
 
 	glLightfv(GL_LIGHT1, GL_AMBIENT, ambientLight);
@@ -65,11 +65,12 @@ void RenderScene::render_initGL_init()
 	glLightfv(GL_LIGHT1, GL_SPECULAR, specularLight);
 	glLightfv(GL_LIGHT1, GL_POSITION, position);
 
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT1);
- 	//glShadeModel(GL_FLAT);
 	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 30.0f);
 	glShadeModel(GL_SMOOTH);
+ 	//glShadeModel(GL_FLAT);
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT1);
 #endif
 }
 

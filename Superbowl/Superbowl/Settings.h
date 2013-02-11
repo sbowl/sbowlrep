@@ -47,6 +47,7 @@ extern int BallMod;
 extern int CamMoveV;
 extern int CamMoveH;
 extern float LightMove;
+extern int LightMod, LightModCtrl, LightModCol;
 
 extern int fps_timer;
 
