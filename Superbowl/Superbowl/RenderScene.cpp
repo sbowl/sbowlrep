@@ -137,3 +137,8 @@ void RenderScene::SwitchTexture()
 {
 	cRendererA.SwitchTexture();
 }
+
+void RenderScene::SwitchProjection()
+{
+	cRendererA.SwitchProjection();
+}

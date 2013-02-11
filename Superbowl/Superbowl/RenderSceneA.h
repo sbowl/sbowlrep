@@ -14,17 +14,21 @@ public:
   void Plane();
 
   void SwitchTexture();
+  void SwitchProjection();
 
   void CreateScene();
 
   void UpdateTextureCoord(float *auiTextureCoord);
 
-  void CalculateTextureCoord();
+  float CalculateTextureCoordX(int VertexIndex);
+  float CalculateTextureCoordY(int VertexIndex);
+  float CalculateLongitude(int VertexIndex);
+  float CalculateLatitude(int VertexIndex);
 
 protected:
 	
-	int TextureMode; //1 = wire, 2 = fill, 3 = texture
-	
+	int TextureMode; //1 = wireframe, 2 = fill, 3 = texture
+	int intProjMode; //0 = without Mercator, 1 = with Mercator
 
 };
 #endif

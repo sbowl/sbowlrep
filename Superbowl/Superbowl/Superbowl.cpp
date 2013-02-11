@@ -42,6 +42,24 @@ void DebugDialog(wchar_t *title, int num1, int num2) {
 	MessageBox(HWND_DESKTOP, txt1, title, MB_OK);
 }
 
+void DebugDialogf(wchar_t *title, float num1, float num2) {
+	wchar_t txt1[100];
+	char txt2[100];
+	int cp = -1;
+
+	/* sprintf verlangt char.. */
+	sprintf_s(txt2, "%f,%f", num1, num2);
+
+	/* convert char to wchar_t... */
+	do {
+			cp++;
+			txt1[cp] = txt2[cp];
+	} while(txt2[cp]);
+
+	/* msgbox verlangt wchar_t.... */
+	MessageBox(HWND_DESKTOP, txt1, title, MB_OK);
+}
+
 /* Loop um alle 1/fps Sekunden irgendwas zu machen */
 #define FPS 25
 void nebenher_zeug(void) {
@@ -233,6 +251,13 @@ void keyboardCallback( unsigned char key, int x, int y)
 	/* ball -> crunchy */
   case 'm':
 	  BallMod = (BallMod + 1) % 2;
+	  break;
+
+	//change mode of projection
+  case 'p':
+	  cRenderer.SwitchProjection();
+	  glutPostRedisplay();
+	  break;
   }
 }
 

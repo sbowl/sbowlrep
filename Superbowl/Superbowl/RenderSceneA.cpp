@@ -4,6 +4,7 @@
 RenderSceneA::RenderSceneA()
 {
 	TextureMode = 1;
+	intProjMode = 0;
 }
 
 void RenderSceneA::CreateScene()
@@ -74,7 +75,7 @@ void RenderSceneA::CreateScene()
     glEnableClientState( GL_NORMAL_ARRAY );
 	float *auiTextureCoord = new float[2*m_iNoVertices];
 	UpdateTextureCoord(auiTextureCoord);
-	
+
 	glTexCoordPointer(2, GL_FLOAT, 0, auiTextureCoord);
 	glEnableClientState( GL_TEXTURE_COORD_ARRAY );
     glDrawElements( GL_TRIANGLES, m_iNoFaces*3, GL_UNSIGNED_INT, auiIndices ); // draw polygons
@@ -141,10 +142,72 @@ void RenderSceneA::SwitchTexture()
 }
 
 void RenderSceneA::UpdateTextureCoord(float *auiTextureCoord)
-{
-	for(int i = 0; i < m_iNoVertices; i=i+2)
+{	
+	//FILE * file = fopen("Debug.log","w");//TODO ENTFERNEN DEBUG
+	for(int i = 0; i < m_iNoVertices; i=i+1)
 	{
-		auiTextureCoord[i]=1.0f/m_iNoVertices * i;
-		auiTextureCoord[i+1]=1.0f/m_iNoVertices * i;
+		auiTextureCoord[2*i]=CalculateTextureCoordX(i); //x-Value
+		auiTextureCoord[2*i+1]=CalculateTextureCoordY(i); //y-Value
+		//fprintf(file,"Vertex Nr.: %d. Koordinaten: %f, %f, %f. TexX: %f, TexY: %f, \n", i, afVertices[3*i],afVertices[3*i+1],afVertices[3*i+2], auiTextureCoord[2*i], auiTextureCoord[2*i+1]);//TODO ENTFERNEN DEBUG
 	}
+	//fclose(file);//TODO ENTFERNEN DEBUG
+}
+
+float RenderSceneA::CalculateTextureCoordX(int VertexIndex)
+{
+	return CalculateLongitude(VertexIndex)/pi;
+}
+
+float RenderSceneA::CalculateTextureCoordY(int VertexIndex)
+{
+	float breitenGrad = CalculateLatitude(VertexIndex);
+	if (intProjMode == 1) breitenGrad = log((1+ sin(breitenGrad))/(1-sin(breitenGrad)))/2;//vlt sogar ohne?
+	breitenGrad = breitenGrad + 1.57079f;
+	breitenGrad = breitenGrad / pi;
+	return breitenGrad;
+}
+
+float RenderSceneA::CalculateLongitude(int VertexIndex)
+{
+	float vx = afVertices[3*VertexIndex + 0];
+	float vy = afVertices[3*VertexIndex + 1];
+	float vz = afVertices[3*VertexIndex + 2];
+	if (vy==1.0f)//TODO wie geht or?
+	{
+		return pi;
+	}
+	else if (vy==-1.0f)
+	{
+		return pi;
+	}
+	float vxneu = vx/2;
+	float vzneu = (sqrt(vx*vx + vz*vz)+vz)/2;
+	float lengthA1 = sqrt(vx*vx + vz*vz);
+	float lengthA3 = sqrt(vxneu*vxneu + vzneu*vzneu);
+	float laengenGrad = 2*acos(lengthA3/lengthA1)/2;
+	if(vx < 0)
+	{
+		laengenGrad = -laengenGrad;
+	}
+	return laengenGrad +pi;
+}
+
+float RenderSceneA::CalculateLatitude(int VertexIndex)
+{
+	float vy = afVertices[3*VertexIndex + 1];
+	if (vy==1.0f) 
+	{
+		vy = 0.9999f;
+	}
+	else if (vy == -1.0f)
+	{
+		vy= -0.9999f;
+	}
+	return asin(vy);//+pi;
+}
+
+void RenderSceneA::SwitchProjection()
+{
+	if (intProjMode == 0) intProjMode = 1;
+	else intProjMode = 0;
 }

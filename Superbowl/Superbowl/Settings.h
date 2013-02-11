@@ -14,6 +14,7 @@ extern bool render_init;
 #define ONEOVERSQRT3 0.57735026918963f
 #define THREEOVERSQRT5 1.34164078649987f
 #define RADIUS 1.0f
+#define pi 3.141592f;
 
 extern const float afBasicVertices[NO_BASIC_VERTICES * 3];
 extern const unsigned int auiBasicIndices[NO_BASIC_FACES * 3];

@@ -28,6 +28,7 @@ public:
   void Refinement();
 
   void SwitchTexture();
+  void SwitchProjection();
 
 protected:
   int   m_iWidth;
