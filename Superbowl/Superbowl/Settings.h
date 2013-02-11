@@ -15,10 +15,14 @@ extern bool render_init;
 #define THREEOVERSQRT5 1.34164078649987f
 #define RADIUS 1.0f
 
+/* für "mods" */
+#define MOD_CRUNCHY ((110.0f - ((float)(rand() % 21))) / 100.0f)
+
 extern const float afBasicVertices[NO_BASIC_VERTICES * 3];
 extern const unsigned int auiBasicIndices[NO_BASIC_FACES * 3];
 
 extern float *afVertices;
+extern float *afVertices_mod, *afVertices_org;
 extern int *auiIndices;
 extern float *auiTextureCoord;
 

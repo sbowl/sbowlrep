@@ -19,6 +19,8 @@ const unsigned int auiBasicIndices[NO_BASIC_FACES*3] =
 };
 
 float *afVertices = new float[NO_VERTICES_MAX * 3];
+float *afVertices_mod = new float[NO_VERTICES_MAX * 3];
+float *afVertices_org = new float[NO_VERTICES_MAX * 3];
 int *auiIndices = new int[NO_FACES_MAX * 3];
 
 int m_iNoVertices = NO_BASIC_VERTICES;
@@ -40,8 +42,13 @@ void initSettings(void) {
 	m_iNoVertices = NO_BASIC_VERTICES;
 	m_iNoFaces = NO_BASIC_FACES;
 
-	for (i = 0; i < NO_BASIC_VERTICES * 3; i++)
-		afVertices[i] = afBasicVertices[i];
+	for (i = 0; i < NO_BASIC_VERTICES * 3; i++) {
+		afVertices_org[i] = afBasicVertices[i];
+		afVertices_mod[i] = afBasicVertices[i] * MOD_CRUNCHY;
+
+		if (BallMod == 0) afVertices[i] = afVertices_org[i];
+		else afVertices[i] = afVertices_mod[i];
+	}
 
 	for (i = 0; i < NO_BASIC_FACES * 3; i++)
 		auiIndices[i] = auiBasicIndices[i];

@@ -101,7 +101,7 @@ void nebenher_zeug(void) {
 #endif
 #if 1 /* pendel */
 		if (!vrot_inverse) {
-			vrot_goal = 30 + (float)(rand() % 60);
+			vrot_goal = 50 + (float)(rand() % 50);
 			vrot_speed = (1.0f + (float)(rand() % 50) / 50) * 2;
 		}
 		/* inverse richtung? */
@@ -233,6 +233,8 @@ void keyboardCallback( unsigned char key, int x, int y)
 	/* ball -> crunchy */
   case 'm':
 	  BallMod = (BallMod + 1) % 2;
+	  if (BallMod == 0) memcpy(afVertices, afVertices_org, sizeof(float) * m_iNoVertices * 3);
+	  else memcpy(afVertices, afVertices_mod, sizeof(float) * m_iNoVertices * 3);
   }
 }
 
