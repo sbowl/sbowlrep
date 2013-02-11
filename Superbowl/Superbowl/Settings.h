@@ -16,7 +16,9 @@ extern bool render_init;
 #define RADIUS 1.0f
 
 /* für "mods" */
-#define MOD_CRUNCHY ((110.0f - ((float)(rand() % 21))) / 100.0f)
+//#define MOD_CRUNCHY ((110.0f - ((float)(rand() % 21))) / 100.0f)
+//etwas geringerer Radius (nur bis zu +5% statt +10%) damit der Boden besser paßt..
+#define MOD_CRUNCHY ((105.0f - ((float)(rand() % 21))) / 100.0f)
 
 extern const float afBasicVertices[NO_BASIC_VERTICES * 3];
 extern const unsigned int auiBasicIndices[NO_BASIC_FACES * 3];
