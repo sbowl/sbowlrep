@@ -1,8 +1,6 @@
 /* extra stuff from doodb */
 #include "stdafx.h"
 
-#define CRUNCHY ((110.0f - ((float)(rand() % 21))) / 100.0f)
-
 RenderSceneB::RenderSceneB()
 {
 }
@@ -96,14 +94,14 @@ void RenderSceneB::RefinementStep()
 			/* berechne coords */
 			vInd = bigFace_vertices[oi6 + 0];
 			oi3 = vInd * 3;
-			vx = afVertices[oi3 + 0];
-			vy = afVertices[oi3 + 1];
-			vz = afVertices[oi3 + 2];
+			vx = afVertices_org[oi3 + 0];
+			vy = afVertices_org[oi3 + 1];
+			vz = afVertices_org[oi3 + 2];
 			vInd = bigFace_vertices[oi6 + 2];
 			oi3 = vInd * 3;
-			vx = (vx + afVertices[oi3 + 0]) / 2;
-			vy = (vy + afVertices[oi3 + 1]) / 2;
-			vz = (vz + afVertices[oi3 + 2]) / 2;
+			vx = (vx + afVertices_org[oi3 + 0]) / 2;
+			vy = (vy + afVertices_org[oi3 + 1]) / 2;
+			vz = (vz + afVertices_org[oi3 + 2]) / 2;
 			/* normalize */
 			vlen = sqrtf(vx*vx + vy*vy + vz*vz);
 			vx = vx / vlen;
@@ -111,18 +109,12 @@ void RenderSceneB::RefinementStep()
 			vz = vz / vlen;
 			/* neuen vertex speichern */
 			oi3 = vertexInd * 3;
-			switch (BallMod) {
-			case 0:
-				afVertices[oi3 + 0] = vx;
-				afVertices[oi3 + 1] = vy;
-				afVertices[oi3 + 2] = vz;
-				break;
-			case 1:
-				afVertices[oi3 + 0] = vx * CRUNCHY;
-				afVertices[oi3 + 1] = vy * CRUNCHY;
-				afVertices[oi3 + 2] = vz * CRUNCHY;
-				break;
-			}
+			afVertices_org[oi3 + 0] = vx;
+			afVertices_org[oi3 + 1] = vy;
+			afVertices_org[oi3 + 2] = vz;
+			afVertices_mod[oi3 + 0] = vx * MOD_CRUNCHY;
+			afVertices_mod[oi3 + 1] = vy * MOD_CRUNCHY;
+			afVertices_mod[oi3 + 2] = vz * MOD_CRUNCHY;
 
 			vertexInd++;
 		}
@@ -134,14 +126,14 @@ void RenderSceneB::RefinementStep()
 			/* berechne coords */
 			vInd = bigFace_vertices[oi6 + 2];
 			oi3 = vInd * 3;
-			vx = afVertices[oi3 + 0];
-			vy = afVertices[oi3 + 1];
-			vz = afVertices[oi3 + 2];
+			vx = afVertices_org[oi3 + 0];
+			vy = afVertices_org[oi3 + 1];
+			vz = afVertices_org[oi3 + 2];
 			vInd = bigFace_vertices[oi6 + 4];
 			oi3 = vInd * 3;
-			vx = (vx + afVertices[oi3 + 0]) / 2;
-			vy = (vy + afVertices[oi3 + 1]) / 2;
-			vz = (vz + afVertices[oi3 + 2]) / 2;
+			vx = (vx + afVertices_org[oi3 + 0]) / 2;
+			vy = (vy + afVertices_org[oi3 + 1]) / 2;
+			vz = (vz + afVertices_org[oi3 + 2]) / 2;
 			/* normalize */
 			vlen = sqrtf(vx*vx + vy*vy + vz*vz);
 			vx = vx / vlen;
@@ -149,18 +141,12 @@ void RenderSceneB::RefinementStep()
 			vz = vz / vlen;
 			/* neuen vertex speichern */
 			oi3 = vertexInd * 3;
-			switch (BallMod) {
-			case 0:
-				afVertices[oi3 + 0] = vx;
-				afVertices[oi3 + 1] = vy;
-				afVertices[oi3 + 2] = vz;
-				break;
-			case 1:
-				afVertices[oi3 + 0] = vx * CRUNCHY;
-				afVertices[oi3 + 1] = vy * CRUNCHY;
-				afVertices[oi3 + 2] = vz * CRUNCHY;
-				break;
-			}
+			afVertices_org[oi3 + 0] = vx;
+			afVertices_org[oi3 + 1] = vy;
+			afVertices_org[oi3 + 2] = vz;
+			afVertices_mod[oi3 + 0] = vx * MOD_CRUNCHY;
+			afVertices_mod[oi3 + 1] = vy * MOD_CRUNCHY;
+			afVertices_mod[oi3 + 2] = vz * MOD_CRUNCHY;
 
 			vertexInd++;
 		}
@@ -172,14 +158,14 @@ void RenderSceneB::RefinementStep()
 			/* berechne coords */
 			vInd = bigFace_vertices[oi6 + 4];
 			oi3 = vInd * 3;
-			vx = afVertices[oi3 + 0];
-			vy = afVertices[oi3 + 1];
-			vz = afVertices[oi3 + 2];
+			vx = afVertices_org[oi3 + 0];
+			vy = afVertices_org[oi3 + 1];
+			vz = afVertices_org[oi3 + 2];
 			vInd = bigFace_vertices[oi6 + 0];
 			oi3 = vInd * 3;
-			vx = (vx + afVertices[oi3 + 0]) / 2;
-			vy = (vy + afVertices[oi3 + 1]) / 2;
-			vz = (vz + afVertices[oi3 + 2]) / 2;
+			vx = (vx + afVertices_org[oi3 + 0]) / 2;
+			vy = (vy + afVertices_org[oi3 + 1]) / 2;
+			vz = (vz + afVertices_org[oi3 + 2]) / 2;
 			/* normalize */
 			vlen = sqrtf(vx*vx + vy*vy + vz*vz);
 			vx = vx / vlen;
@@ -187,18 +173,12 @@ void RenderSceneB::RefinementStep()
 			vz = vz / vlen;
 			/* neuen vertex speichern */
 			oi3 = vertexInd * 3;
-			switch (BallMod) {
-			case 0:
-				afVertices[oi3 + 0] = vx;
-				afVertices[oi3 + 1] = vy;
-				afVertices[oi3 + 2] = vz;
-				break;
-			case 1:
-				afVertices[oi3 + 0] = vx * CRUNCHY;
-				afVertices[oi3 + 1] = vy * CRUNCHY;
-				afVertices[oi3 + 2] = vz * CRUNCHY;
-				break;
-			}
+			afVertices_org[oi3 + 0] = vx;
+			afVertices_org[oi3 + 1] = vy;
+			afVertices_org[oi3 + 2] = vz;
+			afVertices_mod[oi3 + 0] = vx * MOD_CRUNCHY;
+			afVertices_mod[oi3 + 1] = vy * MOD_CRUNCHY;
+			afVertices_mod[oi3 + 2] = vz * MOD_CRUNCHY;
 
 			vertexInd++;
 		}
@@ -284,6 +264,9 @@ void RenderSceneB::RefinementStep()
 		}
 	}
 
+	if (BallMod == 0) memcpy(afVertices, afVertices_org, sizeof(float) * vertexInd * 3);
+	else memcpy(afVertices, afVertices_mod, sizeof(float) * vertexInd * 3);
+
 	/* update # of vertices we got now */
 	m_iNoVertices = vertexInd;
 
@@ -353,3 +336,46 @@ void RenderSceneB::DefinementStep()
 
 #endif
 }
+
+#if 0
+/* Create a matrix that will project the desired shadow. */
+void
+shadowMatrix(GLfloat shadowMat[4][4],
+  GLfloat groundplane[4],
+  GLfloat lightpos[4])
+{
+  GLfloat dot;
+
+  /* Find dot product between light position vector and ground plane normal. */
+  dot = groundplane[X] * lightpos[X] +
+    groundplane[Y] * lightpos[Y] +
+    groundplane[Z] * lightpos[Z] +
+    groundplane[W] * lightpos[W];
+
+  shadowMat[0][0] = dot - lightpos[X] * groundplane[X];
+  shadowMat[1][0] = 0.f - lightpos[X] * groundplane[Y];
+  shadowMat[2][0] = 0.f - lightpos[X] * groundplane[Z];
+  shadowMat[3][0] = 0.f - lightpos[X] * groundplane[W];
+
+  shadowMat[X][1] = 0.f - lightpos[Y] * groundplane[X];
+  shadowMat[1][1] = dot - lightpos[Y] * groundplane[Y];
+  shadowMat[2][1] = 0.f - lightpos[Y] * groundplane[Z];
+  shadowMat[3][1] = 0.f - lightpos[Y] * groundplane[W];
+
+  shadowMat[X][2] = 0.f - lightpos[Z] * groundplane[X];
+  shadowMat[1][2] = 0.f - lightpos[Z] * groundplane[Y];
+  shadowMat[2][2] = dot - lightpos[Z] * groundplane[Z];
+  shadowMat[3][2] = 0.f - lightpos[Z] * groundplane[W];
+
+  shadowMat[X][3] = 0.f - lightpos[W] * groundplane[X];
+  shadowMat[1][3] = 0.f - lightpos[W] * groundplane[Y];
+  shadowMat[2][3] = 0.f - lightpos[W] * groundplane[Z];
+  shadowMat[3][3] = dot - lightpos[W] * groundplane[W];
+}
+//////
+glPushMatrix();
+/* Project the shadow. */
+glMultMatrixf((GLfloat *) floorShadow);
+drawDinosaur();
+glPopMatrix();
+#endif

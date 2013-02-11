@@ -1,6 +1,5 @@
 #include "stdafx.h"
 
-
 RenderSceneA cRendererA;
 RenderSceneB cRendererB;
 
@@ -30,7 +29,7 @@ void RenderScene::render_initGL_init()
   //-----------------------------------------------------------------
   // init GL
   //-----------------------------------------------------------------
-  glClearColor(0.0f,0.0f,0.8f,0.0f); // set background color to blue
+  glClearColor(0.0f,0.0f,0.1f,0.0f); // set background color to blue
   glClearDepth(1.0f); // set depth buffer to far plane
   glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT ); // actually clear the framebuffer
   glEnable(GL_DEPTH_TEST); // enable depth test with the z-buffer
@@ -48,22 +47,31 @@ void RenderScene::render_initGL_init()
 	glPolygonMode(GL_BACK,GL_LINE); //and for the back side
 	glDisable(GL_CULL_FACE); // do not use culling
 	glEnable( GL_MULTISAMPLE_ARB ); // enable anti-aliasing
+
+	
+#if 1 /* zweite Lichtquelle */
+	GLfloat ambientLight[] = {0.1f, 0.1f, 0.1f, 0.0f};
+	GLfloat diffuseLight[] = {2.0f, 0.0f, 0.0f, 1.0f};
+	GLfloat specularLight[] = {0.0f, 2.0f, 0.0f, 1.0f};
+	GLfloat position[] = {0.0f, 3.0f, 5.0f, 1.0f};
+
+	glLightfv(GL_LIGHT1, GL_AMBIENT, ambientLight);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, specularLight);
+	glLightfv(GL_LIGHT1, GL_POSITION, position);
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT1);
+ 	//glShadeModel(GL_FLAT);
+	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 30.0f);
+	glShadeModel(GL_SMOOTH);
+#endif
 }
 
 void RenderScene::render_initGL()
 {
-  float afPos[] = { 0.0, 0.0, 1.0, 0.0 }; // light source at infinity
-  //-----------------------------------------------------------------
-  // init GL
-  //-----------------------------------------------------------------
-  glClearColor(0.0f,0.0f,0.8f,0.0f); // set background color to blue
-  glClearDepth(1.0f); // set depth buffer to far plane
   glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT ); // actually clear the framebuffer
-  glEnable(GL_DEPTH_TEST); // enable depth test with the z-buffer
-  glShadeModel( GL_SMOOTH ); // use Gouraud shading
-  glEnable( GL_LIGHTING ); // enable light calculation
-  glEnable( GL_LIGHT0 ); // set light 0
-  glLightfv( GL_LIGHT0, GL_POSITION, afPos );
+
   //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE); lichteffekte etc fuer textur
 }
 
