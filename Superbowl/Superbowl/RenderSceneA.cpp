@@ -82,9 +82,7 @@ void RenderSceneA::CreateScene()
 
 
 	//rotating Sphere
-	float *afVerticesSphere = new float[NO_VERTICES_SPHERE * 3];
-	int *auiIndicesSphere = new int[NO_FACES_SPHERE * 3];
-	memcpy(afVerticesSphere,afVerticesSphereStart, NO_VERTICES_SPHERE * 3);
+	memcpy(afVerticesSphere,afVerticesSphereStart, NO_VERTICES_SPHERE*3);
 	memcpy(auiIndicesSphere,auiIndicesSphereStart,NO_FACES_SPHERE*3);
 	glVertexPointer( 3, GL_FLOAT, 0, afVerticesSphere );
 	glMatrixMode(GL_MODELVIEW);
@@ -99,7 +97,7 @@ void RenderSceneA::CreateScene()
 	};
 	glMultMatrixf(multMatrix);
 	glDisableClientState( GL_TEXTURE_COORD_ARRAY );
-    glDrawElements( GL_TRIANGLES, NO_FACES_SPHERE*3, GL_UNSIGNED_INT, auiIndicesSphere);
+    //glDrawElements( GL_TRIANGLES, NO_FACES_SPHERE*3, GL_UNSIGNED_INT, auiIndicesSphere);
 
 
 
@@ -138,9 +136,24 @@ void RenderSceneA::CreateScene()
 
 void RenderSceneA::RenderScene()
 {
+	glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glColor3f( 1.0f, 1.0f, 1.0f );
+
+    glVertexPointer( 3, GL_FLOAT, 0, afVertices ); // set pointer to vertex data
+    glNormalPointer( GL_FLOAT, 0, afVertices ); // set pointer to normal data
+    glEnableClientState( GL_VERTEX_ARRAY ); // enable vertex and normal pointer
+    glEnableClientState( GL_NORMAL_ARRAY );
+	float *auiTextureCoord = new float[2*m_iNoVertices];
+	UpdateTextureCoord(auiTextureCoord);
+
+	glTexCoordPointer(2, GL_FLOAT, 0, auiTextureCoord);
+	glEnableClientState( GL_TEXTURE_COORD_ARRAY );
+    glDrawElements( GL_TRIANGLES, m_iNoFaces*3, GL_UNSIGNED_INT, auiIndices );
+
 	glVertexPointer( 3, GL_FLOAT, 0, afVerticesSphere );
 	glDisableClientState( GL_TEXTURE_COORD_ARRAY );
-    glDrawElements( GL_TRIANGLES, NO_FACES_SPHERE*3, GL_UNSIGNED_INT, auiIndicesSphere);
+    //glDrawElements( GL_TRIANGLES, NO_FACES_SPHERE*3, GL_UNSIGNED_INT, auiIndicesSphere);
 }
 
 

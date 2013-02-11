@@ -23,6 +23,10 @@ float *afVertices_mod = new float[NO_VERTICES_MAX * 3];
 float *afVertices_org = new float[NO_VERTICES_MAX * 3];
 int *auiIndices = new int[NO_FACES_MAX * 3];
 
+
+float *afVerticesSphere = new float[NO_VERTICES_SPHERE * 3];
+unsigned int *auiIndicesSphere = new unsigned int[NO_FACES_SPHERE * 3];
+
 int m_iNoVertices = NO_BASIC_VERTICES;
 int m_iNoFaces = NO_BASIC_FACES;
 
