@@ -217,7 +217,7 @@ float RenderSceneA::CalculateTextureCoordX(int VertexIndex)
 float RenderSceneA::CalculateTextureCoordY(int VertexIndex)
 {
 	float breitenGrad = CalculateLatitude(VertexIndex);
-	if (intProjMode == 1) breitenGrad = log((1+ sin(breitenGrad))/(1-sin(breitenGrad)))/2;//vlt sogar ohne?
+	if (intProjMode == 1) breitenGrad = log((1+ sin(breitenGrad))/(1-sin(breitenGrad)))/2;//this should deliver Mercator but looks worse
 	breitenGrad = breitenGrad + 1.57079f;
 	breitenGrad = breitenGrad / pi;
 	return breitenGrad;
